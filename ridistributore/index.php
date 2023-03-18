@@ -108,10 +108,16 @@
             <td>
               <select name="assegnazione" class="form-select">
                 <option selected></option>
-                <option>Borgato Devis</option>
-                <option>Canova Mattia</option>
-                <option>Ciatto Itham</option>
-                <option>Zecchinato Simone</option>
+                <?php
+                  //accesso al db per la query di tutti i gestori delle non conformità per la risoluzione
+                  $conn = new mysqli('localhost', 'root', '', 'bcc') or die($conn -> error);//connessione al db
+                    $result = $conn -> query("SELECT Username FROM utente WHERE Ruolo = 'Dipendente'");//estrazione di tutti i dipendenti
+                  $count = $result -> num_rows;
+                  for($i = 0; $i < $count; $i++){//print di tutti i risultati
+                    $row = $result -> fetch_assoc();
+                    echo '<option value="'.$row['Username'].'">'.$row['Username'].'</option>';
+                  }
+                ?>
               </select>
             </td>
           </tr>
@@ -123,10 +129,16 @@
             <td>
               <select name="assegnazione" class="form-select">
                 <option selected></option>
-                <option>Borgato Devis</option>
-                <option>Canova Mattia</option>
-                <option>Ciatto Itham</option>
-                <option>Zecchinato Simone</option>
+                <?php
+                  //accesso al db per la query di tutti i gestori delle non conformità per la risoluzione
+                  $conn = new mysqli('localhost', 'root', '', 'bcc') or die($conn -> error);//connessione al db
+                    $result = $conn -> query("SELECT Username FROM utente WHERE Ruolo = 'Dipendente'");//estrazione di tutti i dipendenti
+                  $count = $result -> num_rows;
+                  for($i = 0; $i < $count; $i++){//print di tutti i risultati
+                    $row = $result -> fetch_assoc();
+                    echo '<option value="'.$row['Username'].'">'.$row['Username'].'</option>';
+                  }
+                ?>
               </select>
             </td>
           </tr>
@@ -151,10 +163,17 @@
             <td>
               <select name="assegnazione" class="form-select">
                 <option disabled selected></option>
-                <option>Borgato Devis</option>
-                <option>Canova Mattia</option>
-                <option>Ciatto Itham</option>
-                <option>Zecchinato Simone</option>
+                <?php
+                  //accesso al db per la query di tutti i gestori delle non conformità per la verifica
+                  $conn = new mysqli('localhost', 'root', '', 'bcc') or die($conn -> error);//connessione al db
+                  $result = $conn -> query("SELECT Username FROM utente WHERE Ruolo = 'Dipendente'");//estrazione di tutti i dipendenti
+                  $count = $result -> num_rows;
+                  for($i = 0; $i < $count; $i++){
+                    //print di tutti i risultati
+                    $row = $result -> fetch_assoc();
+                    echo '<option value="'.$row['Username'].'">'.$row['Username'].'</option>';
+                  }
+                ?>
               </select>
             </td>
           </tr>
@@ -166,10 +185,17 @@
             <td>
               <select name="assegnazione" class="form-select">
                 <option disabled selected></option>
-                <option>Borgato Devis</option>
-                <option>Canova Mattia</option>
-                <option>Ciatto Itham</option>
-                <option>Zecchinato Simone</option>
+                <?php
+                  //accesso al db per la query di tutti i gestori delle non conformità per la verifica
+                  $conn = new mysqli('localhost', 'root', '', 'bcc') or die($conn -> error);//connessione al db
+                  $result = $conn -> query("SELECT Username FROM utente WHERE Ruolo = 'Dipendente'");//estrazione di tutti i dipendenti
+                  $count = $result -> num_rows;
+                  for($i = 0; $i < $count; $i++){
+                    //print di tutti i risultati
+                    $row = $result -> fetch_assoc();
+                    echo '<option value="'.$row['Username'].'">'.$row['Username'].'</option>';
+                  }
+                ?>
               </select>
             </td>
           </tr>
