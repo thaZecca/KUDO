@@ -1,3 +1,5 @@
+<?php
+?>
 <!doctype html>
 <html lang="it" class="h-100">
   <head>
