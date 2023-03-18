@@ -19,9 +19,10 @@
       }
 
       #intro {
-        background-image: url("./resources/background/img2.jpg");
+        background-image: url("./resources/ridotte/img5.jpg");
+        background-size: cover;
+        background-position: center;
         height: 100vh;
-        background-size: 100% 100%;
       }
 
       @media (min-width: 768px) {
