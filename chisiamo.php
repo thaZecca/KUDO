@@ -19,7 +19,10 @@
       }
 
       #intro {
-        background-image: url("./resources/background/img1.jpg");
+        <?php
+          $rand = rand(1, 7);
+          echo 'background-image: url("./resources/ridotte/img'.$rand.'.jpg");';
+        ?>
         height: 100vh;
         background-size: 100% 100%;
       }
