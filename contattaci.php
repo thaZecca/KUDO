@@ -79,10 +79,10 @@
         <div>
           <h3 class="float-md-start mb-0">KUDO</h3>
           <nav class="nav nav-masthead justify-content-center float-md-end">
-            <a class="nav-link fw-bold py-1 px-0" aria-current="page" href="./index.html">Home</a>
-            <a class="nav-link fw-bold py-1 px-0" href="./chisiamo.html">Chi siamo</a>
-            <a class="nav-link fw-bold py-1 px-0 active" href="./contattaci.html">Contattaci</a>
-            <a class="nav-link fw-bold py-1 px-0" href="./login/index.html">Login</a>
+            <a class="nav-link fw-bold py-1 px-0" aria-current="page" href="./index.php">Home</a>
+            <a class="nav-link fw-bold py-1 px-0" href="./chisiamo.php">Chi siamo</a>
+            <a class="nav-link fw-bold py-1 px-0 active" href="./contattaci.php">Contattaci</a>
+            <a class="nav-link fw-bold py-1 px-0" href="./login/index.php">Login</a>
           </nav>
         </div>
       </header>
