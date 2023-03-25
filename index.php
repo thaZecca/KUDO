@@ -19,7 +19,10 @@
       }
 
       #intro {
-        background-image: url("./resources/ridotte/img5.jpg");
+        <?php
+          $rand = rand(1, 7);
+          echo 'background-image: url("./resources/ridotte/img'.$rand.'.jpg");';
+        ?>
         background-size: cover;
         background-position: center;
         height: 100vh;
@@ -80,10 +83,10 @@
         <div>
           <h3 class="float-md-start mb-0">KUDO</h3>
           <nav class="nav nav-masthead justify-content-center float-md-end">
-            <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="./index.html">Home</a>
-            <a class="nav-link fw-bold py-1 px-0" href="./chisiamo.html">Chi siamo</a>
-            <a class="nav-link fw-bold py-1 px-0" href="./contattaci.html">Contattaci</a>
-            <a class="nav-link fw-bold py-1 px-0" href="./login/index.html">Login</a>
+            <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="./index.php">Home</a>
+            <a class="nav-link fw-bold py-1 px-0" href="./chisiamo.php">Chi siamo</a>
+            <a class="nav-link fw-bold py-1 px-0" href="./contattaci.php">Contattaci</a>
+            <a class="nav-link fw-bold py-1 px-0" href="./login/index.php">Login</a>
           </nav>
         </div>
       </header>
@@ -93,7 +96,7 @@
       <h1>KUDO, make it easy.</h1>
       <p class="lead">Il gestore di non conformità che semplifica la vita alla tua azienda.</p>
       <p class="lead">
-        <a href="./chisiamo.html" class="btn btn-lg btn-light fw-bold border-white bg-white">Scopri di più</a>
+        <a href="./chisiamo.php" class="btn btn-lg btn-light fw-bold border-white bg-white">Scopri di più</a>
       </p>
     </main>
 
