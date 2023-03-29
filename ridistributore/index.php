@@ -83,30 +83,30 @@
 			<span class="fs-4 ms-3">Kudo</span>
 		  </a>
 		  <a href="../login/index.html" class="nav-link">
-			<span class="">Logout</span>
+			<span class="">Logout 👋</span>
 		  </a>
       </div>
     </header>
 
     <div class="p-5 mb-4 bg-light rounded-3">
-      <div class="container-fluid ">
-        <h1 class="display-5 fw-bold">In primo piano</h1><br>
+      <h1 class="display-5 fw-bold">In primo piano 📰</h1><br>
+      <div class="container-fluid table-responsive">
         <p class="lead col-md-8 fs-8">Non conformità da risolvere.</p>
         <table class="table table-striped table-hover">
           <tr>
-            <th>ID</th>
-            <th>Origine</th>
-            <th>Causa</th>
-            <th>Scadenza</th>
-            <th>Azione correttiva</th>
-            <th>Assegna</th>
+            <th>ID 🎯</th>
+            <th>Origine 🚩</th>
+            <th>Causa 🔥</th>
+            <th>Scadenza 🕑</th>
+            <th>Azione correttiva 🧯</th>
+            <th>Assegna ✔</th>
           </tr>
           <tr>
             <td>#001</td>
             <td>Logistica</td>
             <td>Lotto bottiglie #16A1 difettoso</td>
-            <td>30/01/2023</td>
-            <td>Controllo macchinari di produzione</td>
+            <td><input type="date" class="form-control"></td>
+            <td><input type="text" class="form-control"></td>
             <td>
               <select name="assegnazione" class="form-select">
                 <option selected></option>
@@ -121,8 +121,8 @@
             <td>#002</td>
             <td>Produzione bottiglie</td>
             <td>Macchina soffiatrice incastrata</td>
-            <td>01/02/2023</td>
-            <td>Correzione problema</td>
+            <td><input type="date" class="form-control"></td>
+            <td><input type="text" class="form-control"></td>
             <td>
               <select name="assegnazione" class="form-select">
                 <option selected></option>
@@ -133,28 +133,24 @@
               </select>
             </td>
           </tr>
-          <tr><td></td><td></td><td></td><td></td><td></td><td><button id="botn" class="btn btn-primary btn-lg" type="button">Assegna</button></td></tr>
         </table>
-        <button id="botn" class="btn btn-primary btn-lg" type="button">Assegna</button>
       </div>
-      <div class="container-fluid py-5">
+      <div class="container-fluid py-5 table-responsive">
         <p class="lead col-md-8 fs-8">Non conformità da verificare.</p>
         <table class="table table-striped table-hover">
           <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Descrizione</th>
-            <th>Entro</th>
-            <th>Assegna</th>
+            <th>ID 🎯</th>
+            <th>Azione eseguita 🦺</th>
+            <th>Scadenza 🕑</th>
+            <th>Assegna ✔</th>
           </tr>
           <tr>
-            <td>#001</td>
-            <td>Bottiglie</td>
-            <td>Lotto bottiglie #16A1 difettoso</td>
-            <td>30/01/2023</td>
+            <td>#003</td>
+            <td>Contattare fornitori plastica</td>
+            <td><input type="date" class="form-control"></td>
             <td>
               <select name="assegnazione" class="form-select">
-                <option disabled selected></option>
+                <option selected></option>
                 <option>Borgato Devis</option>
                 <option>Canova Mattia</option>
                 <option>Ciatto Itham</option>
@@ -163,13 +159,12 @@
             </td>
           </tr>
           <tr>
-            <td>#002</td>
-            <td>Bottiglie</td>
-            <td>Macchina soffiatrice incastrata</td>
-            <td>01/02/2023</td>
+            <td>#004</td>
+            <td>Acquisto macchinario tappi</td>
+            <td><input type="date" class="form-control"></td>
             <td>
               <select name="assegnazione" class="form-select">
-                <option disabled selected></option>
+                <option selected></option>
                 <option>Borgato Devis</option>
                 <option>Canova Mattia</option>
                 <option>Ciatto Itham</option>
@@ -178,29 +173,54 @@
             </td>
           </tr>
         </table>
-        <button class="btn btn-primary btn-lg" type="button" id="botn">Assegna</button>
+        <input id="botn" class="mt-3 btn btn-primary btn-lg" type="submit" value="Esegui">
       </div>
     </div>
 
-    <div class="row align-items-md-stretch">
-      <div class="col-md-6">
+    <div class="row align-items-xxl-stretch">
+      <div class="col-xxl-6 mb-3">
         <div class="h-100 p-5 text-bg-dark rounded-3">
-          <h2>Segnala una non conformità</h2>
-          <p>Swap the background-color utility and add a `.text-*` color utility to mix up the jumbotron look. Then, mix and match with additional component themes and more.</p>
+          <h2>Segnala una non conformità 📢</h2>
+          <div class="container-fluid table-responsive mt-4">
+            <table class="table table-dark table-striped">
+              <tr>
+                <th>Origine</th>
+                <th>Causa</th>
+              </tr>
+              <tr>
+                <td>
+                  <select name="origine" class="form-select">
+                    <option selected></option>
+                    <option>Logistica</option>
+                    <option>Produzione</option>
+                    <option>Risorse umane</option>
+                  </select>
+                </td>
+                <td><input type="text" class="form-control" name="causa"></td>
+              </tr>
+            </table>
+          </div>
           <button class="btn btn-outline-light" type="button">Segnala</button>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-xxl-6 mb-3">
         <div class="h-100 p-5 bg-light border rounded-3">
-          <h2>Storico</h2>
-          <p>Or, keep it light and add a border for some added definition to the boundaries of your content. Be sure to look under the hood at the source HTML here as we've adjusted the alignment and sizing of both column's content for equal-height.</p>
-          <button class="btn btn-outline-secondary" type="button">Esplora</button>
+          <h2>Storico 📚</h2>
+          <p>Lo storico mostra tutte le non conformità presenti, suddividendole in:
+            <ul>
+              <li>Da correggere</li>
+              <li>Da verificare</li>
+              <li>In attesa</li>
+              <li>Concluse</li>
+            </ul>
+          </p>
+          <a href="#"><button class="btn btn-outline-secondary" type="button">Esplora</button></a>
         </div>
       </div>
     </div>
 
-    <footer class="pt-3 mt-4 text-muted border-top">
-      &copy; IMSPEC 2022
+    <footer class="pt-3 mt-1 text-muted border-top">
+      &copy; IMSPEC 2023
     </footer>
   </div>
 </main>
