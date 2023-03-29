@@ -17,8 +17,11 @@
         user-select: none;
       }
 
-      #intro {
-        background-image: url("../resources/ridotte/img5.jpg");
+        #intro {
+        <?php
+          $rand = rand(1, 7);
+          echo 'background-image: url("../resources/ridotte/img'.$rand.'.jpg");';
+        ?>
         background-size: cover;
         background-position: center;
         height: 100vh;
