@@ -23,8 +23,9 @@
           $rand = rand(1, 7);
           echo 'background-image: url("./resources/ridotte/img'.$rand.'.jpg");';
         ?>
+        background-size: cover;
+        background-position: center;
         height: 100vh;
-        background-size: 100% 100%;
       }
 
       @media (min-width: 768px) {
