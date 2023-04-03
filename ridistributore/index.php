@@ -101,38 +101,39 @@
             <th>Azione correttiva 🧯</th>
             <th>Assegna ✔</th>
           </tr>
-          <tr>
-            <td>#001</td>
-            <td>Logistica</td>
-            <td>Lotto bottiglie #16A1 difettoso</td>
-            <td><input type="date" class="form-control"></td>
-            <td><input type="text" class="form-control"></td>
-            <td>
-              <select name="assegnazione" class="form-select">
-                <option selected></option>
-                <option>Borgato Devis</option>
-                <option>Canova Mattia</option>
-                <option>Ciatto Itham</option>
-                <option>Zecchinato Simone</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td>#002</td>
-            <td>Produzione bottiglie</td>
-            <td>Macchina soffiatrice incastrata</td>
-            <td><input type="date" class="form-control"></td>
-            <td><input type="text" class="form-control"></td>
-            <td>
-              <select name="assegnazione" class="form-select">
-                <option selected></option>
-                <option>Borgato Devis</option>
-                <option>Canova Mattia</option>
-                <option>Ciatto Itham</option>
-                <option>Zecchinato Simone</option>
-              </select>
-            </td>
-          </tr>
+            <?php
+              $result = $conn -> query("SELECT * FROM non_conformita AS NC WHERE NC.UserCorrezione is NULL");
+              $num = $result -> num_rows;
+              for ($i=0; $i < $num; $i++) { 
+                echo '<tr>';
+                $row = $result -> fetch_assoc();
+                echo '<td>#'.$row['ID_NC'].'</td>';
+                if($row['isInterna'] == 1){
+                  echo '<td>'.$row['Nome_Reparto'].'</td>';
+                }else{
+                  $idf = $row['ID_Fornitore'];
+                  $fornitore = $conn -> query("SELECT F.Nominativo FROM fornitore AS F WHERE F.ID_Fornitore = $idf");
+                  $nomeFornitore = $fornitore -> fetch_assoc;
+                  echo '<td>'.$nomeFornitore['Nominativo'].'</td>';
+                }
+                echo '<td>'.$row['Causa'].'</td>';
+                echo '<td><input type="date" class="form-control"></td>';
+                echo '<td><input type="text" class="form-control"></td>';
+                echo '
+                  <td>
+                  <select name="assegnazione" class="form-select">
+                  <option selected></option>
+                ';
+                $dip = $conn -> query("SELECT * FROM utente AS U WHERE U.Ruolo = 'Dipendente'");
+                $nDip = $dip -> num_rows;
+                for ($j=0; $j < $nDip; $j++) {
+                  $rowDip = $dip -> fetch_assoc();
+                  echo '<option>'.$rowDip['Username'].'</option>';
+                }
+                echo '</select>';
+                echo '</tr>';
+              }
+            ?>
         </table>
       </div>
       <div class="container-fluid py-5 table-responsive">
