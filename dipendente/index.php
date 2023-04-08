@@ -127,35 +127,36 @@
               </tr>
             </table>
           </div>
+          <form action="dipendenteVerifica.php" method="post">
+            <div class="container-fluid py-5 table-responsive">
+              <p class="lead col-md-8 fs-8">Non conformità da verificare.</p>
+              <table class="table table-striped table-hover">
+                <tr>
+                  <th>ID 🎯</th>
+                  <th>Azione eseguita 🦺</th>
+                  <th>Scadenza 🕑</th>
+                  <th>Fatto ✔</th>
+                </tr>
+                <tr>
+                  <?php 
+                    $qry="SELECT ID_NC, Azione_Correttiva, DataScadenza
+                    FROM non_conformita JOIN utente ON (UserCorrezione=Username)
+                    WHERE Username='".$_SESSION['username']."' AND isCorretta=1 AND isVerificata=0";
 
-          <div class="container-fluid py-5 table-responsive">
-            <p class="lead col-md-8 fs-8">Non conformità da verificare.</p>
-            <table class="table table-striped table-hover">
-              <tr>
-                <th>ID 🎯</th>
-                <th>Azione eseguita 🦺</th>
-                <th>Scadenza 🕑</th>
-                <th>Fatto ✔</th>
-              </tr>
-              <tr>
-                <?php 
-                  $qry="SELECT ID_NC, Azione_Correttiva, DataScadenza
-                  FROM non_conformita JOIN utente ON (UserCorrezione=Username)
-                  WHERE Username='".$_SESSION['username']."' AND isCorretta=1 AND isVerificata=0";
-
-                  $res = $conn -> query($qry);
-                  $num = $res -> num_rows;
-                  for($i=0; $i<$num; $i++){
-                    $row = $res -> fetch_assoc();
-                    echo '<td>#'.$row['ID_NC'].'</td><td>'.$row['Azione_Correttiva'].'</td><td>'.$row['DataScadenza'].'</td>';
-                    echo '<td><input class="form-check-input" type="checkbox" name="'.$row['ID_NC'].'"></td>';
-                  }
-                ?>
-              </tr>
-            </table>
-            <input id="botn" class="mt-3 btn btn-primary btn-lg" type="submit" value="Esegui">
+                    $res = $conn -> query($qry);
+                    $num = $res -> num_rows;
+                    for($i=0; $i<$num; $i++){
+                      $row = $res -> fetch_assoc();
+                      echo '<td>#'.$row['ID_NC'].'</td><td>'.$row['Azione_Correttiva'].'</td><td>'.$row['DataScadenza'].'</td>';
+                      echo '<td><input class="form-check-input" type="checkbox" name="'.$row['ID_NC'].'"></td>';
+                    }
+                  ?>
+                </tr>
+              </table>
+              <input id="botn" class="mt-3 btn btn-primary btn-lg" type="submit" value="Esegui">
+            </div>
           </div>
-        </div>
+        </form>
 
         <div class="row align-items-md-stretch">
           <div class="col-md-6">
