@@ -1,8 +1,8 @@
 <?php
     $host="localhost";
-    $username="root";//borgato5if2122
-    $password="";
-    $db_nome="bcc";//my_borgato5if2122
+    $username="qq5ccx3u_root";
+    $password="kudokudo2023";
+    $db_nome="qq5ccx3u_kudo";
     $tab_nome="utente";
 
     $conn = new mysqli($host, $username, $password, $db_nome) or die($conn -> error);
@@ -34,7 +34,7 @@
         if($row['Ruolo'] == 'Ridistributore'){
         	header("Location: ../ridistributore/index.php");//pagina del ridistributore
         }else if($row['Ruolo'] == 'Dipendente'){
-        	header("Location: ../dipendente/index.html");//pagina del dipendente
+        	header("Location: ../dipendente/index.php");//pagina del dipendente
         }else if($row['Ruolo'] == 'Amministratore'){
         	header("Location: ../amministratore/Registrazione.php");//altre pagine che verranno
         }else{
