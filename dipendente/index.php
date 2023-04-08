@@ -10,6 +10,15 @@
   <?php 
         session_start();
         if(!isset($_SESSION['username']))   header('location: ..\login\index.php');
+
+        $host="localhost";
+        $username="qq5ccx3u_root";
+        $password="kudokudo2023";
+        $db_nome="qq5ccx3u_kudo";
+        $tab_nome="utente";
+
+        $conn = new mysqli($host, $username, $password, $db_nome) or die($conn -> error);
+        $conn -> select_db($db_nome) or die($conn -> error);
   ?> 
 
   <link href="../resources/css/bootstrap.min.css" rel="stylesheet">
@@ -100,20 +109,10 @@
                 <th>Scadenza 🕑</th>
                 <th>Fatto ✔</th>
               </tr>
-              <tr>
-                <td>#001</td>
-                <td>Lotto bottiglie #16A1 difettoso</td>
-                <td>Riparazione macchinario soffiatura</td>
-                <td>30/01/2023</td>
-                <td><input class="form-check-input" type="checkbox" name="1"></td>
-              </tr>
-              <tr>
-                <td>#002</td>
-                <td>Macchina soffiatrice incastrata</td>
-                <td>Identificazione e correzione problema</td>
-                <td>01/02/2023</td>
-                <td><input class="form-check-input" type="checkbox" name="2"></td>
-              </tr>
+              <?php 
+                $qry='SELECT NC.ID_NC, NC.Causa, NC.Azione_Correttiva, NC.DataScadenza
+                      FROM non_conformita NC JOIN utente U ON (NC.UserCorrezione=U.Username)';
+              ?>
             </table>
           </div>
           <div class="container-fluid py-5 table-responsive">
