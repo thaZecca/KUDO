@@ -6,14 +6,11 @@
     <title>Dashboard - Ridistributore</title>
     <link rel="icon" href="../resources/logo.png">
   </head>
-
-    
+ 
   <?php 
         session_start();
         if(!isset($_SESSION['username']))   header('location: ..\login\index.php');
-  ?>
-
-    
+  ?> 
 
 <link href="../resources/css/bootstrap.min.css" rel="stylesheet">
 
