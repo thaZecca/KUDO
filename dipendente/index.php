@@ -78,11 +78,11 @@
       <div class="container py-4">
         <header class="pb-3 mb-4 border-bottom navbar navbar-expand-lg ">
         <div class="container-fluid">
-          <a href="" class="d-flex align-items-center text-dark text-decoration-none nav-link">
+          <a href="https://kudokudo.it/dipendente/" class="d-flex align-items-center text-dark text-decoration-none nav-link">
           <img src="../resources/logo.png" height=50 width=50>
           <span class="fs-4 ms-3">Kudo</span>
           </a>
-          <a href="../login/index.html" class="nav-link">
+          <a href="../login/index.php" class="nav-link">
           <span class="">Logout 👋</span>
           </a>
           </div>
