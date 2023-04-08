@@ -115,7 +115,7 @@
                       FROM non_conformita NC JOIN utente U ON (NC.UserCorrezione=U.Username)';
 
                 $res = $conn -> query($qry);
-                $num = $res -> num_rows();
+                $num = $res -> num_rows;
                 for($i=0; $i<$num; $i++){
                   $row = $res -> fetch_assoc();
                   echo '<td>'.$row['NC.ID'].'</td><td>'.$row['NC.Causa'].'</td><td>'.$row['NC.Azione_Correttiva'].'</td><td>'.$row['NC.DataScadenza'].'</td>';
