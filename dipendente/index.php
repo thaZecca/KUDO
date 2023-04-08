@@ -111,14 +111,17 @@
               </tr>
               <tr>
               <?php 
-                $qry='SELECT NC.ID_NC, NC.Causa, NC.Azione_Correttiva, NC.DataScadenza
-                      FROM non_conformita NC JOIN utente U ON (NC.UserCorrezione=U.Username)';
+                $qry="SELECT ID_NC, Causa, Azione_Correttiva, DataScadenza
+                      FROM non_conformita JOIN utente ON (UserCorrezione=Username)
+                      WHERE Username='".$_SESSION['username']."'";
 
                 $res = $conn -> query($qry);
                 $num = $res -> num_rows;
                 for($i=0; $i<$num; $i++){
                   $row = $res -> fetch_assoc();
-                  echo '<td>'.$row['NC.ID'].'</td><td>'.$row['NC.Causa'].'</td><td>'.$row['NC.Azione_Correttiva'].'</td><td>'.$row['NC.DataScadenza'].'</td>';
+                  echo '<td>#'.$row['ID_NC'].'</td><td>'.$row['Causa'].'</td><td>'.$row['Azione_Correttiva'].'</td><td>'.$row['DataScadenza'].'</td>';
+                  echo '<td><input class="form-check-input" type="checkbox" name="'.$row['ID_NC'].'"></td>';
+                  
                 }               
               ?>
               </tr>
@@ -131,7 +134,7 @@
                 <th>ID 🎯</th>
                 <th>Azione eseguita 🦺</th>
                 <th>Scadenza 🕑</th>
-                <th>Assegna ✔</th>
+                <th>Fatto ✔</th>
               </tr>
               <tr>
                 <td>#003</td>
