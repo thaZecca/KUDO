@@ -101,82 +101,84 @@
       <h1 class="display-5 fw-bold">In primo piano 📰</h1><br>
       <div class="container-fluid table-responsive">
         <p class="lead col-md-8 fs-8">Non conformità da risolvere.</p>
-        <table class="table table-striped table-hover">
-          <tr>
-            <th>ID 🎯</th>
-            <th>Origine 🚩</th>
-            <th>Causa 🔥</th>
-            <th>Scadenza 🕑</th>
-            <th>Azione correttiva 🧯</th>
-            <th>Assegna ✔</th>
-          </tr>
-          <tr></tr>
-          <?php
-              $qry="SELECT ID_NC, isInterna, Nome_Reparto, ID_Fornitore, Causa FROM non_conformita WHERE UserCorrezione IS NULL";
-              $qryDipendenti="SELECT Username FROM utente";
+        <form action="ridistributoreVerifica.php" method="post">
+          <table class="table table-striped table-hover">
+            <tr>
+              <th>ID 🎯</th>
+              <th>Origine 🚩</th>
+              <th>Causa 🔥</th>
+              <th>Scadenza 🕑</th>
+              <th>Azione correttiva 🧯</th>
+              <th>Assegna ✔</th>
+            </tr>
+            <tr></tr>
+            <?php
+                $qry="SELECT ID_NC, isInterna, Nome_Reparto, ID_Fornitore, Causa FROM non_conformita WHERE UserCorrezione IS NULL";
+                $qryDipendenti="SELECT Username FROM utente";
 
-              $res = $conn -> query($qry);
-              $num = $res -> num_rows;
+                $res = $conn -> query($qry);
+                $num = $res -> num_rows;
 
-              $resDipendenti = $conn -> query($qryDipendenti);
-              $numDipendenti = $resDipendenti -> num_rows;
-              $dipendenti = array();
-              for($j=0; $j<$numDipendenti; $j++){
-                $rowDipendenti = $resDipendenti -> fetch_assoc();
-                $dipendenti[]=$rowDipendenti['Username'];
-              }
-
-              for($i=0; $i<$num; $i++){
-                echo '<tr>';
-                $row = $res -> fetch_assoc();
-                if(!isset($row['ID_Fornitore'])){
-                  echo '<td>#'.$row['ID_NC'].'</td><td>'.$row['Nome_Reparto'].'</td><td>'.$row['Causa'].'</td><td><input type="date" class="form-control" name="scadCorr'.$row['ID_NC'].'"></td>
-                        <td><input type="text" class="form-control" name="azcorr'.$row['ID_NC'].'"></td>';
-                }else{
-                  $fornitore = $conn -> query("SELECT Nominativo FROM fornitore WHERE ID_Fornitore=".$row['ID_Fornitore']);
-                  echo '<td>#'.$row['ID_NC'].'</td><td>'.$fornitore->fetch_assoc()['Nominativo'].'</td><td>'.$row['Causa'].'</td><td><input type="date" class="form-control" name="scadCorr'.$row['ID_NC'].'"></td>
-                        <td><input type="text" class="form-control" name="azcorr'.$row['ID_NC'].'"></td>';
-                }
-                echo '<td><select name="asseCor'.$row['ID_NC'].'" class="form-select"><option selected></option>';
+                $resDipendenti = $conn -> query($qryDipendenti);
+                $numDipendenti = $resDipendenti -> num_rows;
+                $dipendenti = array();
                 for($j=0; $j<$numDipendenti; $j++){
-                  echo '<option>'.$dipendenti[$j].'</option>';
+                  $rowDipendenti = $resDipendenti -> fetch_assoc();
+                  $dipendenti[]=$rowDipendenti['Username'];
                 }
-                echo '</select></tr>';
-              }
 
-            ?>
-        </table>
-      </div>
-      <div class="container-fluid py-5 table-responsive">
-        <p class="lead col-md-8 fs-8">Non conformità da verificare.</p>
-        <table class="table table-striped table-hover">
-          <tr>
-            <th>ID 🎯</th>
-            <th>Azione eseguita 🦺</th>
-            <th>Scadenza 🕑</th>
-            <th>Assegna ✔</th>
-          </tr>
-          <tr></tr>
-          <?php
-            $qry="SELECT ID_NC, Azione_Correttiva FROM non_conformita WHERE isCorretta=1 AND UserVerifica IS NULL";
+                for($i=0; $i<$num; $i++){
+                  echo '<tr>';
+                  $row = $res -> fetch_assoc();
+                  if(!isset($row['ID_Fornitore'])){
+                    echo '<td>#'.$row['ID_NC'].'</td><td>'.$row['Nome_Reparto'].'</td><td>'.$row['Causa'].'</td><td><input type="date" class="form-control" name="scadCorr'.$row['ID_NC'].'"></td>
+                          <td><input type="text" class="form-control" name="azcorr'.$row['ID_NC'].'"></td>';
+                  }else{
+                    $fornitore = $conn -> query("SELECT Nominativo FROM fornitore WHERE ID_Fornitore=".$row['ID_Fornitore']);
+                    echo '<td>#'.$row['ID_NC'].'</td><td>'.$fornitore->fetch_assoc()['Nominativo'].'</td><td>'.$row['Causa'].'</td><td><input type="date" class="form-control" name="scadCorr'.$row['ID_NC'].'"></td>
+                          <td><input type="text" class="form-control" name="azcorr'.$row['ID_NC'].'"></td>';
+                  }
+                  echo '<td><select name="asseCor'.$row['ID_NC'].'" class="form-select"><option selected></option>';
+                  for($j=0; $j<$numDipendenti; $j++){
+                    echo '<option>'.$dipendenti[$j].'</option>';
+                  }
+                  echo '</select></tr>';
+                }
 
-            $res = $conn -> query($qry);
-            $num = $res -> num_rows;
+              ?>
+          </table>
+          </div>
+          <div class="container-fluid py-5 table-responsive">
+            <p class="lead col-md-8 fs-8">Non conformità da verificare.</p>
+            <table class="table table-striped table-hover">
+              <tr>
+                <th>ID 🎯</th>
+                <th>Azione eseguita 🦺</th>
+                <th>Scadenza 🕑</th>
+                <th>Assegna ✔</th>
+              </tr>
+              <tr></tr>
+              <?php
+                $qry="SELECT ID_NC, Azione_Correttiva FROM non_conformita WHERE isCorretta=1 AND UserVerifica IS NULL";
 
-            for($i=0; $i<$num; $i++){
-              echo '<tr>';
-              $row = $res -> fetch_assoc();
-              echo '<td>#'.$row['ID_NC'].'</td><td>'.$row['Azione_Correttiva'].'</td><td><input type="date" class="form-control" name="scadVer'.$row['ID_NC'].'"></td>';
-              echo '<td><select name="asseVer'.$row['ID_NC'].'" class="form-select"><option selected></option>';
-              for($j=0; $j<$numDipendenti; $j++){
-                echo '<option>'.$dipendenti[$j].'</option>';
-              }
-              echo '</select></tr>';
-            }
+                $res = $conn -> query($qry);
+                $num = $res -> num_rows;
 
-          ?>
-        </table>
-        <input id="botn" class="mt-3 btn btn-primary btn-lg" type="submit" value="Esegui">
+                for($i=0; $i<$num; $i++){
+                  echo '<tr>';
+                  $row = $res -> fetch_assoc();
+                  echo '<td>#'.$row['ID_NC'].'</td><td>'.$row['Azione_Correttiva'].'</td><td><input type="date" class="form-control" name="scadVer'.$row['ID_NC'].'"></td>';
+                  echo '<td><select name="asseVer'.$row['ID_NC'].'" class="form-select"><option selected></option>';
+                  for($j=0; $j<$numDipendenti; $j++){
+                    echo '<option>'.$dipendenti[$j].'</option>';
+                  }
+                  echo '</select></tr>';
+                }
+
+              ?>
+            </table>
+            <input id="botn" class="mt-3 btn btn-primary btn-lg" type="submit" value="Esegui">
+        </form>
       </div>
     </div>
 
