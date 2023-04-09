@@ -130,14 +130,14 @@
                 echo '<tr>';
                 $row = $res -> fetch_assoc();
                 if(!isset($row['ID_Fornitore'])){
-                  echo '<td>#'.$row['ID_NC'].'</td><td>'.$row['Nome_Reparto'].'</td><td>'.$row['Causa'].'</td><td><input type="date" class="form-control" name="scad'.$row['ID_NC'].'"></td>
+                  echo '<td>#'.$row['ID_NC'].'</td><td>'.$row['Nome_Reparto'].'</td><td>'.$row['Causa'].'</td><td><input type="date" class="form-control" name="scadCorr'.$row['ID_NC'].'"></td>
                         <td><input type="text" class="form-control" name="azcorr'.$row['ID_NC'].'"></td>';
                 }else{
                   $fornitore = $conn -> query("SELECT Nominativo FROM fornitore WHERE ID_Fornitore=".$row['ID_Fornitore']);
-                  echo '<td>#'.$row['ID_NC'].'</td><td>'.$fornitore->fetch_assoc()['Nominativo'].'</td><td>'.$row['Causa'].'</td><td><input type="date" class="form-control" name="scad'.$row['ID_NC'].'"></td>
+                  echo '<td>#'.$row['ID_NC'].'</td><td>'.$fornitore->fetch_assoc()['Nominativo'].'</td><td>'.$row['Causa'].'</td><td><input type="date" class="form-control" name="scadCorr'.$row['ID_NC'].'"></td>
                         <td><input type="text" class="form-control" name="azcorr'.$row['ID_NC'].'"></td>';
                 }
-                echo '<td><select name="asse'.$row['ID_NC'].'" class="form-select"><option selected></option>';
+                echo '<td><select name="asseCor'.$row['ID_NC'].'" class="form-select"><option selected></option>';
                 for($j=0; $j<$numDipendenti; $j++){
                   echo '<option>'.$dipendenti[$j].'</option>';
                 }
@@ -156,34 +156,25 @@
             <th>Scadenza 🕑</th>
             <th>Assegna ✔</th>
           </tr>
-          <tr>
-            <td>#003</td>
-            <td>Contattare fornitori plastica</td>
-            <td><input type="date" class="form-control"></td>
-            <td>
-              <select name="assegnazione" class="form-select">
-                <option selected></option>
-                <option>Borgato Devis</option>
-                <option>Canova Mattia</option>
-                <option>Ciatto Itham</option>
-                <option>Zecchinato Simone</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td>#004</td>
-            <td>Acquisto macchinario tappi</td>
-            <td><input type="date" class="form-control"></td>
-            <td>
-              <select name="assegnazione" class="form-select">
-                <option selected></option>
-                <option>Borgato Devis</option>
-                <option>Canova Mattia</option>
-                <option>Ciatto Itham</option>
-                <option>Zecchinato Simone</option>
-              </select>
-            </td>
-          </tr>
+          <tr></tr>
+          <?php
+            $qry="SELECT ID_NC, Azione_Correttiva FROM non_conformita WHERE isCorretta=1 AND UserVerifica IS NULL";
+
+            $res = $conn -> query($qry);
+            $num = $res -> num_rows;
+
+            for($i=0; $i<$num; $i++){
+              echo '<tr>';
+              $row = $res -> fetch_assoc();
+              echo '<td>#'.$row['ID_NC'].'</td><td>'.$row['Azione_Correttiva'].'</td><td><input type="date" class="form-control" name="scadVer'.$row['ID_NC'].'"></td>';
+              echo '<td><select name="asseVer'.$row['ID_NC'].'" class="form-select"><option selected></option>';
+              for($j=0; $j<$numDipendenti; $j++){
+                echo '<option>'.$dipendenti[$j].'</option>';
+              }
+              echo '</select></tr>';
+            }
+
+          ?>
         </table>
         <input id="botn" class="mt-3 btn btn-primary btn-lg" type="submit" value="Esegui">
       </div>
