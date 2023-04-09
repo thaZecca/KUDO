@@ -10,6 +10,14 @@
   <?php 
         session_start();
         if(!isset($_SESSION['username']))   header('location: ..\login\index.php');
+
+        $host="localhost";
+        $username="qq5ccx3u_root";
+        $password="kudokudo2023";
+        $db_nome="qq5ccx3u_kudo";
+
+        $conn = new mysqli($host, $username, $password, $db_nome) or die($conn -> error);
+        $conn -> select_db($db_nome) or die($conn -> error);
   ?> 
 
 <link href="../resources/css/bootstrap.min.css" rel="stylesheet">
@@ -102,38 +110,40 @@
             <th>Azione correttiva 🧯</th>
             <th>Assegna ✔</th>
           </tr>
-            <?php
-              $result = $conn -> query("SELECT * FROM non_conformita AS NC WHERE NC.UserCorrezione is NULL");
-              $num = $result -> num_rows;
-              for ($i=0; $i < $num; $i++) { 
-                echo '<tr>';
-                $row = $result -> fetch_assoc();
-                echo '<td>#'.$row['ID_NC'].'</td>';
-                if($row['isInterna'] == 1){
-                  echo '<td>'.$row['Nome_Reparto'].'</td>';
-                }else{
-                  $idf = $row['ID_Fornitore'];
-                  $fornitore = $conn -> query("SELECT F.Nominativo FROM fornitore AS F WHERE F.ID_Fornitore = $idf");
-                  $nomeFornitore = $fornitore -> fetch_assoc;
-                  echo '<td>'.$nomeFornitore['Nominativo'].'</td>';
-                }
-                echo '<td>'.$row['Causa'].'</td>';
-                echo '<td><input type="date" class="form-control"></td>';
-                echo '<td><input type="text" class="form-control"></td>';
-                echo '
-                  <td>
-                  <select name="assegnazione" class="form-select">
-                  <option selected></option>
-                ';
-                $dip = $conn -> query("SELECT * FROM utente AS U WHERE U.Ruolo = 'Dipendente'");
-                $nDip = $dip -> num_rows;
-                for ($j=0; $j < $nDip; $j++) {
-                  $rowDip = $dip -> fetch_assoc();
-                  echo '<option>'.$rowDip['Username'].'</option>';
-                }
-                echo '</select>';
-                echo '</tr>';
+          <tr></tr>
+          <?php
+              $qry="SELECT ID_NC, isInterna, Nome_Reparto, ID_Fornitore, Causa FROM non_conformita WHERE UserCorrezione IS NULL";
+              $qryDipendenti="SELECT Username FROM utente";
+
+              $res = $conn -> query($qry);
+              $num = $res -> num_rows;
+
+              $resDipendenti = $conn -> query($qryDipendenti);
+              $numDipendenti = $resDipendenti -> num_rows;
+              $dipendenti = array();
+              for($j=0; $j<$numDipendenti; $j++){
+                $rowDipendenti = $resDipendenti -> fetch_assoc();
+                $dipendenti[]=$rowDipendenti['Username'];
               }
+
+              for($i=0; $i<$num; $i++){
+                echo '<tr>';
+                $row = $res -> fetch_assoc();
+                if(!isset($row['ID_Fornitore'])){
+                  echo '<td>#'.$row['ID_NC'].'</td><td>'.$row['Nome_Reparto'].'</td><td>'.$row['Causa'].'</td><td><input type="date" class="form-control" name="scad'.$row['ID_NC'].'"></td>
+                        <td><input type="text" class="form-control" name="azcorr'.$row['ID_NC'].'"></td>';
+                }else{
+                  $fornitore = $conn -> query("SELECT Nominativo FROM fornitore WHERE ID_Fornitore=".$row['ID_Fornitore']);
+                  echo '<td>#'.$row['ID_NC'].'</td><td>'.$fornitore->fetch_assoc()['Nominativo'].'</td><td>'.$row['Causa'].'</td><td><input type="date" class="form-control" name="scad'.$row['ID_NC'].'"></td>
+                        <td><input type="text" class="form-control" name="azcorr'.$row['ID_NC'].'"></td>';
+                }
+                echo '<td><select name="asse'.$row['ID_NC'].'" class="form-select"><option selected></option>';
+                for($j=0; $j<$numDipendenti; $j++){
+                  echo '<option>'.$dipendenti[$j].'</option>';
+                }
+                echo '</select></tr>';
+              }
+
             ?>
         </table>
       </div>

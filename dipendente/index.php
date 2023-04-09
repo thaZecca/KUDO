@@ -110,7 +110,7 @@
                   <th>Scadenza 🕑</th>
                   <th>Fatto ✔</th>
                 </tr>
-                <tr>
+                <tr></tr>
                 <?php 
                   $qry="SELECT ID_NC, Causa, Azione_Correttiva, DataScadenza
                         FROM non_conformita JOIN utente ON (UserCorrezione=Username)
@@ -119,13 +119,13 @@
                   $res = $conn -> query($qry);
                   $num = $res -> num_rows;
                   for($i=0; $i<$num; $i++){
+                    echo '<tr>';
                     $row = $res -> fetch_assoc();
                     echo '<td>#'.$row['ID_NC'].'</td><td>'.$row['Causa'].'</td><td>'.$row['Azione_Correttiva'].'</td><td>'.$row['DataScadenza'].'</td>';
                     echo '<td><input class="form-check-input" type="checkbox" name="'.$row['ID_NC'].'"></td>';
-                    
+                    echo '</tr>';
                   }               
                 ?>
-                </tr>
               </table>
             </div>
               <div class="container-fluid py-5 table-responsive">
@@ -137,7 +137,7 @@
                     <th>Scadenza 🕑</th>
                     <th>Fatto ✔</th>
                   </tr>
-                  <tr>
+                  <tr></tr>
                     <?php 
                       $qry="SELECT ID_NC, Azione_Correttiva, DataScadenza
                       FROM non_conformita JOIN utente ON (UserVerifica=Username)
@@ -146,12 +146,13 @@
                       $res = $conn -> query($qry);
                       $num = $res -> num_rows;
                       for($i=0; $i<$num; $i++){
+                        echo '<tr>';
                         $row = $res -> fetch_assoc();
                         echo '<td>#'.$row['ID_NC'].'</td><td>'.$row['Azione_Correttiva'].'</td><td>'.$row['DataScadenza'].'</td>';
                         echo '<td><input class="form-check-input" type="checkbox" name="'.$row['ID_NC'].'"></td>';
+                        echo '</tr>';
                       }
                     ?>
-                  </tr>
                 </table>
                 <input id="botn" class="mt-3 btn btn-primary btn-lg" type="submit" value="Esegui">
               </div>
