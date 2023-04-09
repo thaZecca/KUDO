@@ -20,7 +20,9 @@
 
     for($i=0; $i<$num; $i++){
         $row = $res -> fetch_assoc();
-        if(isset($_POST[''.$row['ID_NC']])) $conn -> query("");
+        if(isset($_POST[''.$row['ID_NC']])) $conn -> query("UPDATE non_conformita SET isCorretta=1 WHERE ID_NC=".$row['ID_NC']);
     }
+
+    header('location: index.php');
 
 ?>
