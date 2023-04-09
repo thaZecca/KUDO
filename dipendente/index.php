@@ -140,7 +140,7 @@
                   <tr>
                     <?php 
                       $qry="SELECT ID_NC, Azione_Correttiva, DataScadenza
-                      FROM non_conformita JOIN utente ON (UserCorrezione=Username)
+                      FROM non_conformita JOIN utente ON (UserVerifica=Username)
                       WHERE Username='".$_SESSION['username']."' AND isCorretta=1 AND isVerificata=0";
 
                       $res = $conn -> query($qry);
