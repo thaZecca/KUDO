@@ -177,6 +177,32 @@
 
               ?>
             </table>
+          </div>
+            <div class="container-fluid py-5 table-responsive">
+              <p class="lead col-md-8 fs-8">Non conformità da chiudere.</p>
+              <table class="table table-striped table-hover">
+                <tr>
+                  <th>ID 🎯</th>
+                  <th>Azione eseguita 🦺</th>
+                  <th>Chiudi ✔</th>
+                 </tr>
+                <tr></tr>
+                  <?php 
+                    $qry="SELECT ID_NC, Azione_Correttiva
+                    FROM non_conformita
+                    WHERE isCorretta=1 AND isVerificata=1 AND isChiusa=0";
+
+                    $res = $conn -> query($qry);
+                    $num = $res -> num_rows;
+                    for($i=0; $i<$num; $i++){
+                      echo '<tr>';
+                      $row = $res -> fetch_assoc();
+                      echo '<td>#'.$row['ID_NC'].'</td><td>'.$row['Azione_Correttiva'].'</td>';
+                      echo '<td><input class="form-check-input" type="checkbox" name="'.$row['ID_NC'].'"></td>';
+                      echo '</tr>';
+                    }
+                  ?>
+              </table>
             <input id="botn" class="mt-3 btn btn-primary btn-lg" type="submit" value="Esegui">
         </form>
       </div>

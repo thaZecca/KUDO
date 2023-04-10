@@ -40,6 +40,17 @@
             $conn -> query("UPDATE non_conformita SET UserVerifica='".$_POST['asseVer'.$v]."', DataScadenza='".$_POST['scadVer'.$v]."' WHERE ID_NC=".$v);
     }
 
+    $qry="SELECT ID_NC, Azione_Correttiva
+          FROM non_conformita
+          WHERE isCorretta=1 AND isVerificata=1 AND isChiusa=0";
+
+    $res = $conn -> query($qry);
+    $num = $res -> num_rows;
+    for($i=0; $i<$num; $i++){
+        $row = $res -> fetch_assoc();
+        if(isset($_POST[''.$row['ID_NC']])) $conn -> query("UPDATE non_conformita SET isChiusa=1 WHERE ID_NC=".$row['ID_NC']);
+    }
+
     header('location: index.php');
 
 ?>
