@@ -32,14 +32,14 @@
         $row = $result -> fetch_assoc();
 
         if($row['Ruolo'] == 'Ridistributore'){
+            $_SESSION['ruolo']='Ridistributore';
         	header("Location: ../ridistributore/index.php");//pagina del ridistributore
         }else if($row['Ruolo'] == 'Dipendente'){
+            $_SESSION['ruolo']='Dipendente';
         	header("Location: ../dipendente/index.php");//pagina del dipendente
         }else if($row['Ruolo'] == 'Amministratore'){
-        	header("Location: ../amministratore/Registrazione.php");//altre pagine che verranno
-        }else{
-            //header("Location: ../dipendente/index.html");//altre pagine che verranno
-            echo 'da gestire, damme tempo';
+            $_SESSION['ruolo']='Amministratore';
+        	header("Location: ../amministratore/index.php");//altre pagine che verranno
         }
     }else{
         echo '
