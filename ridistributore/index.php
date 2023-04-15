@@ -9,7 +9,7 @@
  
   <?php 
         session_start();
-        if(!isset($_SESSION['username']))   header('location: ..\login\index.php');
+        if($_SESSION['ruolo']!='Ridistributore')   header('location: ..\login\index.php');
 
         $host="localhost";
         $username="qq5ccx3u_root";
@@ -92,24 +92,24 @@
 			<span class="fs-4 ms-3">Kudo</span>
 		  </a>
 		  <a href="../login/index.php" class="nav-link">
-			<span class="">Logout 👋</span>
+			<span class="">Logout ðŸ‘‹</span>
 		  </a>
       </div>
     </header>
 
     <div class="p-5 mb-4 bg-light rounded-3">
-      <h1 class="display-5 fw-bold">In primo piano 📰</h1><br>
+      <h1 class="display-5 fw-bold">In primo piano ðŸ“°</h1><br>
       <div class="container-fluid table-responsive">
-        <p class="lead col-md-8 fs-8">Non conformità da risolvere.</p>
+        <p class="lead col-md-8 fs-8">Non conformitÃ  da risolvere.</p>
         <form action="ridistributoreVerifica.php" method="post">
           <table class="table table-striped table-hover">
             <tr>
-              <th>ID 🎯</th>
-              <th>Origine 🚩</th>
-              <th>Causa 🔥</th>
-              <th>Scadenza 🕑</th>
-              <th>Azione correttiva 🧯</th>
-              <th>Assegna ✔</th>
+              <th>ID ðŸŽ¯</th>
+              <th>Origine ðŸš©</th>
+              <th>Causa ðŸ”¥</th>
+              <th>Scadenza ðŸ•‘</th>
+              <th>Azione correttiva ðŸ§¯</th>
+              <th>Assegna âœ”</th>
             </tr>
             <tr></tr>
             <?php
@@ -149,13 +149,13 @@
           </table>
           </div>
           <div class="container-fluid py-5 table-responsive">
-            <p class="lead col-md-8 fs-8">Non conformità da verificare.</p>
+            <p class="lead col-md-8 fs-8">Non conformitÃ  da verificare.</p>
             <table class="table table-striped table-hover">
               <tr>
-                <th>ID 🎯</th>
-                <th>Azione eseguita 🦺</th>
-                <th>Scadenza 🕑</th>
-                <th>Assegna ✔</th>
+                <th>ID ðŸŽ¯</th>
+                <th>Azione eseguita ðŸ¦º</th>
+                <th>Scadenza ðŸ•‘</th>
+                <th>Assegna âœ”</th>
               </tr>
               <tr></tr>
               <?php
@@ -179,12 +179,12 @@
             </table>
           </div>
             <div class="container-fluid py-5 table-responsive">
-              <p class="lead col-md-8 fs-8">Non conformità da chiudere.</p>
+              <p class="lead col-md-8 fs-8">Non conformitÃ  da chiudere.</p>
               <table class="table table-striped table-hover">
                 <tr>
-                  <th>ID 🎯</th>
-                  <th>Azione eseguita 🦺</th>
-                  <th>Chiudi ✔</th>
+                  <th>ID ðŸŽ¯</th>
+                  <th>Azione eseguita ðŸ¦º</th>
+                  <th>Chiudi âœ”</th>
                  </tr>
                 <tr></tr>
                   <?php 
@@ -211,7 +211,7 @@
     <div class="row align-items-xxl-stretch">
       <div class="col-xxl-6 mb-3">
         <div class="h-100 p-5 text-bg-dark rounded-3">
-          <h2>Segnala una non conformità 📢</h2>
+          <h2>Segnala una non conformitÃ  ðŸ“¢</h2>
           <div class="container-fluid table-responsive mt-4">
             <table class="table table-dark table-striped">
               <tr>
@@ -236,8 +236,8 @@
       </div>
       <div class="col-xxl-6 mb-3">
         <div class="h-100 p-5 bg-light border rounded-3">
-          <h2>Storico 📚</h2>
-          <p>Lo storico mostra tutte le non conformità presenti, suddividendole in:
+          <h2>Storico ðŸ“š</h2>
+          <p>Lo storico mostra tutte le non conformitÃ  presenti, suddividendole in:
             <ul>
               <li>Da correggere</li>
               <li>Da verificare</li>
