@@ -9,7 +9,7 @@
     
   <?php 
         session_start();
-        if(!isset($_SESSION['username']))   header('location: ..\login\index.php');
+        if($_SESSION['ruolo']!='Dipendente')   header('location: ..\login\index.php');
 
         $host="localhost";
         $username="qq5ccx3u_root";
@@ -92,7 +92,7 @@
           <span class="fs-4 ms-3">Kudo</span>
           </a>
           <a href="../login/index.php" class="nav-link">
-          <span class="">Logout 👋</span>
+          <span class="">Logout ðŸ‘‹</span>
           </a>
           </div>
         </header>
@@ -100,15 +100,15 @@
         <form action="dipendenteVerifica.php" method="post">
           <div class="p-5 mb-4 bg-light rounded-3">
             <div class="container-fluid table-responsive">
-              <h1 class="display-5 fw-bold">In primo piano 📰</h1><br>
-              <p class="lead col-md-8 fs-8">Non conformità da risolvere.</p>
+              <h1 class="display-5 fw-bold">In primo piano ðŸ“°</h1><br>
+              <p class="lead col-md-8 fs-8">Non conformitÃ  da risolvere.</p>
               <table class="table table-striped table-hover">
                 <tr>
-                  <th>ID 🎯</th>
-                  <th>Causa 🔥</th>
-                  <th>Azione correttiva 🧯</th>
-                  <th>Scadenza 🕑</th>
-                  <th>Fatto ✔</th>
+                  <th>ID ðŸŽ¯</th>
+                  <th>Causa ðŸ”¥</th>
+                  <th>Azione correttiva ðŸ§¯</th>
+                  <th>Scadenza ðŸ•‘</th>
+                  <th>Fatto âœ”</th>
                 </tr>
                 <tr></tr>
                 <?php 
@@ -129,13 +129,13 @@
               </table>
             </div>
               <div class="container-fluid py-5 table-responsive">
-                <p class="lead col-md-8 fs-8">Non conformità da verificare.</p>
+                <p class="lead col-md-8 fs-8">Non conformitÃ  da verificare.</p>
                 <table class="table table-striped table-hover">
                   <tr>
-                    <th>ID 🎯</th>
-                    <th>Azione eseguita 🦺</th>
-                    <th>Scadenza 🕑</th>
-                    <th>Fatto ✔</th>
+                    <th>ID ðŸŽ¯</th>
+                    <th>Azione eseguita ðŸ¦º</th>
+                    <th>Scadenza ðŸ•‘</th>
+                    <th>Fatto âœ”</th>
                   </tr>
                   <tr></tr>
                     <?php 
@@ -163,7 +163,7 @@
         <div class="row align-items-md-stretch">
           <div class="col-md-6">
             <div class="h-100 p-5 text-bg-dark rounded-3">
-              <h2>Segnala una non conformità 📢</h2>
+              <h2>Segnala una non conformitÃ  ðŸ“¢</h2>
               <div class="container-fluid table-responsive mt-4">
                 <table class="table table-dark table-striped">
                   <tr>
@@ -188,8 +188,8 @@
           </div>
           <div class="col-md-6">
             <div class="h-100 p-5 bg-light border rounded-3">
-              <h2>Storico 📚</h2>
-              <p>Lo storico mostra tutte le non conformità presenti, suddividendole in:
+              <h2>Storico ðŸ“š</h2>
+              <p>Lo storico mostra tutte le non conformitÃ  presenti, suddividendole in:
                 <ul>
                   <li>Da correggere</li>
                   <li>Da verificare</li>
