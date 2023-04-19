@@ -95,7 +95,7 @@
 			<img src="../resources/logo.png" height=50 width=50>
 			<span class="fs-4 ms-3">Kudo</span>
 		  </a>
-		  <a href="../login/index.html" class="nav-link">
+		  <a href="../login/index.php" class="nav-link">
 			<span class="">Logout</span>
 		  </a>
       </div>
