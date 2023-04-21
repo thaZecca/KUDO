@@ -114,7 +114,7 @@
             <tr></tr>
             <?php
                 $qry="SELECT ID_NC, isInterna, Nome_Reparto, ID_Fornitore, Causa FROM non_conformita WHERE UserCorrezione IS NULL";
-                $qryDipendenti="SELECT Username FROM utente";
+                $qryDipendenti="SELECT Username FROM utente WHERE Ruolo<>'Amministratore' OR Ruolo<>'Ridistributore'";
 
                 $res = $conn -> query($qry);
                 $num = $res -> num_rows;
