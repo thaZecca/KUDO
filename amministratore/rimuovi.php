@@ -129,7 +129,7 @@
                   <select name="assegnazione" class="form-select">
                     <option selected></option>
                       <?php
-                        $q = "SELECT * FROM utente";
+                        $q = "SELECT * FROM utente  WHERE Username <> 'UtenteRimosso'";
                         $ris = $conn -> query($q);
                         $nUtenti = $ris -> num_rows;
                         for ($i=0; $i < $nUtenti; $i++) { 
