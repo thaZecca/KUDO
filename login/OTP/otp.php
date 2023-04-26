@@ -1,7 +1,7 @@
 <?php
     session_start();
 
-    if(!isset($_SESSION['ruolo'])) header('location: index.php');
+    if(!isset($_SESSION['ruolo'])) header('location: ../index.php');
 
     $host="localhost";
     $username="qq5ccx3u_root";
@@ -19,6 +19,9 @@
     for($i=0; $i<6; $i++){
         $codiceOTP.=''.rand(0,9);
     }
+
+    
+
 ?>
 <!doctype html>
 <html lang="it" class="h-100">
@@ -26,10 +29,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>KUDO · OTP</title>
-    <link rel="icon" href="../resources/logo.png">
+    <link rel="icon" href="../../resources/logo.png">
   </head>
 
-<link href="../resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
       .bd-placeholder-img {
@@ -43,7 +46,7 @@
       #intro {
         <?php
           $rand = rand(1, 7);
-          echo 'background-image: url("../resources/ridotte/img'.$rand.'.jpg");';
+          echo 'background-image: url("../../resources/ridotte/img'.$rand.'.jpg");';
         ?>
         background-size: cover;
         background-position: center;
@@ -96,14 +99,14 @@
 
     
     <!-- Custom styles for this template -->
-    <link href="../cover.css" rel="stylesheet">
+    <link href="../../cover.css" rel="stylesheet">
   </head>
   
   <body class="d-flex h-100 text-center text-bg-dark" id="intro">
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
 
         <main class="px-3">
-            <img class="mb-4" src="./resources/logoBianco.png" alt="" width="100" height="100">
+            <img class="mb-4" src="../../resources/logoBianco.png" alt="" width="100" height="100">
             <h1>Verifica codice OTP</h1>
             <p>Inserisci il codice OTP che ti è arrivato per email</p>
         </main>
