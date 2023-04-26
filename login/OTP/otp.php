@@ -8,7 +8,7 @@
     $password="kudokudo2023";
     $db_nome="qq5ccx3u_kudo";
 
-    $conn -> mysqli($host, $username, $password, $db_name);
+    $conn = mysqli($host, $username, $password, $db_name) or die($conn -> error);;
 
     $qry='SELECT Username, Email FROM utente WHERE Username='.$_SESSION['username'];
     $res = $conn -> query($qry);
