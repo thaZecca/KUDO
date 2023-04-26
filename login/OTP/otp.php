@@ -22,6 +22,8 @@
         $codiceOTP.=''.rand(0,9);
     }
 
+    $_SESSION['otp']=$codiceOTP;
+
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
     use PHPMailer\PHPMailer\SMTP;
@@ -150,9 +152,9 @@
         </main>
         <form  action="./controllaOTP.php" method="POST">
           <img class="mb-4" src="../resources/logoBianco.png" alt="" width="100" height="100">
-          <h1 class="h3 mb-3 fw-normal white">Accedi</h1>
+          <!--<h1 class="h3 mb-3 fw-normal white">Accedi</h1>-->
           <div class="form-floating">
-            <input type="text" name="codice" class="form-control" id="floatingInput" placeholder="codice">
+            <input type="text" name="codiceOTP" class="form-control" id="floatingInput" placeholder="codice">
             <label for="floatingInput">codice</label>
           </div>
           <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
