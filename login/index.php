@@ -81,11 +81,11 @@
         <h1 class="h3 mb-3 fw-normal white">Accedi</h1>
 
         <div class="form-floating">
-          <input type="text" class="form-control" id="floatingInput" placeholder="username">
+          <input type="text" name="username" class="form-control" id="floatingInput" placeholder="username">
           <label for="floatingInput">username</label>
         </div>
         <div class="form-floating">
-          <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+          <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
           <label for="floatingPassword">password</label>
         </div>
         <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>

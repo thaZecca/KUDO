@@ -148,6 +148,15 @@
             <h1>Verifica codice OTP</h1>
             <p>Inserisci il codice OTP che ti è arrivato per email</p>
         </main>
+        <form  action="./controlla.php" method="POST">
+          <img class="mb-4" src="../resources/logoBianco.png" alt="" width="100" height="100">
+          <h1 class="h3 mb-3 fw-normal white">Accedi</h1>
+          <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInput" placeholder="codice" name="codice">
+            <label for="floatingInput">codice</label>
+          </div>
+          <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+        </form>
 
         <footer class="mt-auto text-white-50">
         <p>IMSPEC &copy; 2022</p>
