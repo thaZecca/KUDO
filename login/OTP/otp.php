@@ -14,7 +14,7 @@
     $res = $conn -> query($qry);
     $row = $res -> fetch_assoc();
 
-    $username = $row['Username']
+    $username = $row['Username'];
     $emailUtente = $row['Email'];
 
     $codiceOTP='';
