@@ -10,9 +10,11 @@
 
     $conn -> mysqli($host, $username, $password, $db_name);
 
-    $qry='SELECT Email FROM utente WHERE Username='.$_SESSION['username'];
+    $qry='SELECT Username, Email FROM utente WHERE Username='.$_SESSION['username'];
     $res = $conn -> query($qry);
     $row = $res -> fetch_assoc();
+
+    $username = $row['Username']
     $emailUtente = $row['Email'];
 
     $codiceOTP='';
@@ -20,7 +22,43 @@
         $codiceOTP.=''.rand(0,9);
     }
 
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+    use PHPMailer\PHPMailer\SMTP;
     
+    require './PHPMailer/src/Exception.php';
+    require './PHPMailer/src/PHPMailer.php';
+    require './PHPMailer/src/SMTP.php';
+        
+        
+    $mail = new PHPMailer(true);
+    
+    try {
+      //Server settings
+      $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+      $mail->isSMTP();                                            //Send using SMTP
+      $mail->Host       = 'authsmtp.securemail.pro';                     //Set the SMTP server to send through
+      $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+      $mail->Username   = 'service@kudokudo.it';                     //SMTP username
+      $mail->Password   = 'Kudokudo2023';                               //SMTP password
+      $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
+      $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+  
+      //Recipients
+      $mail->setFrom('service@kudokudo.it', 'Service Kudo');
+      $mail->addAddress(''.$emailUtente, ''.$username);     //Add a recipient
+
+  
+      //Content
+      $mail->isHTML(true);                                  //Set email format to HTML
+      $mail->Subject = 'Codice OTP Kudo';
+      $mail->Body    = 'Codice OTP Kudo: <b>467923</b>';
+      $mail->AltBody = 'Codice OTP Kudo 467923';
+  
+      $p = $mail->send();
+    } catch (Exception $e) {
+      echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
 
 ?>
 <!doctype html>
