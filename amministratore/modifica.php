@@ -98,7 +98,7 @@ $conn = new mysqli('localhost', 'root', '', 'bcc');
 
 <body>
   <main>
-    <form action="modifica.php" method="post">
+    <form action="action.php" method="post">
       <div class="container py-4">
         <header class="pb-3 mb-4 border-bottom navbar navbar-expand-lg ">
           <div class="container-fluid">
@@ -171,11 +171,3 @@ $conn = new mysqli('localhost', 'root', '', 'bcc');
 </body>
 </html>
 
-<?php
-  if(isset($_POST['update'])){
-    $r = $_POST['ruolo'];
-    $u = $_POST['assegnazione'];
-    $queryModifica = "UPDATE utente SET Ruolo = '$r' WHERE Username = '$u'";
-    $conn -> query($queryModifica);
-  }
-?>
