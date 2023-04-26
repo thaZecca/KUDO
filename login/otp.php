@@ -1,3 +1,25 @@
+<?php
+    session_start();
+
+    if(!isset($_SESSION['ruolo'])) header('location: index.php');
+
+    $host="localhost";
+    $username="qq5ccx3u_root";
+    $password="kudokudo2023";
+    $db_nome="qq5ccx3u_kudo";
+
+    $conn -> mysqli($host, $username, $password, $db_name);
+
+    $qry='SELECT Email FROM utente WHERE Username='.$_SESSION['username'];
+    $res = $conn -> query($qry);
+    $row = $res -> fetch_assoc();
+    $emailUtente = $row['Email'];
+
+    $codiceOTP='';
+    for($i=0; $i<6; $i++){
+        $codiceOTP.=''.rand(0,9);
+    }
+?>
 <!doctype html>
 <html lang="it" class="h-100">
   <head>
@@ -81,12 +103,9 @@
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
 
         <main class="px-3">
-        <img class="mb-4" src="./resources/logoBianco.png" alt="" width="100" height="100">
-        <h1>Verifica codice OTP</h1>
-        <p class="lead">Il gestore di non conformità che semplifica la vita alla tua azienda.</p>
-        <p class="lead">
-            <a href="./chisiamo.php" class="btn btn-lg btn-light fw-bold border-white bg-white">Scopri di più</a>
-        </p>
+            <img class="mb-4" src="./resources/logoBianco.png" alt="" width="100" height="100">
+            <h1>Verifica codice OTP</h1>
+            <p>Inserisci il codice OTP che ti è arrivato per email</p>
         </main>
 
         <footer class="mt-auto text-white-50">
