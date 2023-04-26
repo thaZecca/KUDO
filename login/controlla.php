@@ -46,5 +46,6 @@
         Identificazione non riuscita: nome utente o password errati <br>
         Torna alla pagina di <a href="index.php">login</a> <br>
         ';
+        //header('location: ./index.php');
     }
 ?>
