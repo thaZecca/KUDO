@@ -12,10 +12,9 @@
 
     $qry='SELECT Username, Email FROM utente WHERE Username='.$_SESSION['username'];
     $res = $conn -> query($qry);
-    $row = $res -> fetch_assoc();
 
-    $username = $row['Username'];
-    $emailUtente = $row['Email'];
+    $username = $res['Username'];
+    $emailUtente = $res['Email'];
 
     $codiceOTP='';
     for($i=0; $i<6; $i++){
