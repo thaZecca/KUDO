@@ -31,16 +31,9 @@
         $_SESSION['password'] = $password;
         $row = $result -> fetch_assoc();
 
-        if($row['Ruolo'] == 'Ridistributore'){
-            $_SESSION['ruolo']='Ridistributore';
-        	header("Location: ../ridistributore/index.php");//pagina del ridistributore
-        }else if($row['Ruolo'] == 'Dipendente'){
-            $_SESSION['ruolo']='Dipendente';
-        	header("Location: ../dipendente/index.php");//pagina del dipendente
-        }else if($row['Ruolo'] == 'Amministratore'){
-            $_SESSION['ruolo']='Amministratore';
-        	header("Location: ../amministratore/index.php");//altre pagine che verranno
-        }
+        $_SESSION['ruolo']=$row['Ruolo'];
+        header('location: ./OTP/otp.php');
+
     }else{
         echo '
         Identificazione non riuscita: nome utente o password errati <br>
