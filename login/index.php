@@ -77,7 +77,7 @@
   <body class="text-center bg-image shadow-2-strong" id="intro">
     <main class="form-signin w-100 m-auto" >
       <form  action="./controlla.php" method="POST">
-        <img class="mb-4" src="../resources/logoBianco.png" alt="" width="100" height="100">
+        <a href="../index.php"><img class="mb-4" src="../resources/logoBianco.png" alt="" width="100" height="100"></a>
         <h1 class="h3 mb-3 fw-normal white">Accedi</h1>
 
         <div class="form-floating">
