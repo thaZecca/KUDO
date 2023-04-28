@@ -30,6 +30,37 @@
 </ul>
 <p>Questa sezione ti permette di vedere lo storico completo di tutte le non conformità e di verificare lo stato corrente di ogni non conformità.</p>
 <br/><br/><br/>
+<h2>Pagina ridistributore</h2>
+<p>La pagina ridistributore è la prima che vedrai quando accedi al sistema. È suddivisa in tre sezioni principali:</p>
+
+<h3>In primo Piano</h3>
+<p>Questa sezione elenca le non conformità attuali che devono essere gestite. Ci sono due tipi di non conformità:</p>
+<ul>
+  <li>Non conformità da risolvere: ogni non conformità è identificata da un ID univoco e include informazioni sulla causa della non conformità, la scadenza per l'azione correttiva e a chi è assegnata la non conofrmità da risolvere.</li>
+  <li>Non conformità da verificare: ogni non conformità è identificata da un ID univoco e include informazioni sull'azione eseguita, la scadenza per la verifica, l'azione correttiva e a chi è assegnata la non conformità.</li>
+</ul>
+
+<h3>Segnala una non conformità</h3>
+<p>In questa sezione puoi segnalare una nuova non conformità al sistema. Per farlo, seleziona l'origine della non conformità dal menu a tendina "Origine". Le opzioni di origine includono:</p>
+<ul>
+  <li>Logistica</li>
+  <li>Produzione</li>
+  <li>Risorse Umane</li>
+</ul>
+<p>Inserisci quindi la causa della non conformità nella textbox accanto. Questa informazione è importante per garantire che la non conformità venga risolta correttamente. Assicurati di fornire tutte le informazioni pertinenti per la causa della non conformità.</p>
+
+<h3>Storico</h3>
+<p>Questa sezione mostra tutte le non conformità che sono state segnalate e gestite dal sistema. Le non conformità sono divise in quattro categorie:</p>
+<ul>
+  <li>Da correggere</li>
+  <li>Da verificare</li>
+  <li>In attesa</li>
+  <li>Concluse</li>
+</ul>
+<p>Questa sezione ti permette di vedere lo storico completo di tutte le non conformità e di verificare lo stato corrente di ogni non conformità.</p>
+
+
+<br/><br/><br/>
 <h2>Sintesi</h2>
 <p>Per utilizzare il sistema al meglio, è importante essere consapevoli di alcune cose. Prima di tutto, è importante che ogni non conformità venga segnalata e gestita nel sistema in modo tempestivo e accurato. Questo aiuta a garantire che le non conformità vengano risolte in modo rapido ed efficace e che non si verifichino problemi simili in futuro.</p>
 
