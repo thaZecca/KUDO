@@ -245,7 +245,7 @@
               <li>Concluse</li>
             </ul>
           </p>
-          <a href="#"><button class="btn btn-outline-secondary" type="button">Esplora</button></a>
+          <a href="./storico/storico.php"><button class="btn btn-outline-secondary" type="button">Esplora</button></a>
         </div>
       </div>
     </div>
