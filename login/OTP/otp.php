@@ -69,7 +69,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>KUDO · OTP</title>
     <link rel="icon" href="../../resources/logo.png">
-  </head>
 
 <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
 
@@ -138,30 +137,21 @@
 
     
     <!-- Custom styles for this template -->
-    <link href="../../cover.css" rel="stylesheet">
+    <link href="../../resources/css/otp.css" rel="stylesheet">
   </head>
   
-  <body class="d-flex h-100 text-center text-bg-dark" id="intro">
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-
-        <main class="px-3">
+  <body class="text-center" id="intro">
+    <main class="form-signin w-100 m-auto">
+        <form  action="./controllaOTP.php" method="POST">
             <img class="mb-4" src="../../resources/logoBianco.png" alt="" width="100" height="100">
             <h1>Verifica codice OTP</h1>
             <p>Inserisci il codice OTP che ti è arrivato per email</p>
-        </main>
-        <form  action="./controllaOTP.php" method="POST">
-          <img class="mb-4" src="../resources/logoBianco.png" alt="" width="100" height="100">
-          <!--<h1 class="h3 mb-3 fw-normal white">Accedi</h1>-->
-          <div class="form-floating">
-            <input type="text" name="codiceOTP" class="form-control" id="floatingInput" placeholder="codice">
-            <label for="floatingInput">codice</label>
-          </div>
-          <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+            <div class="form-floating">
+                <input type="text" name="codiceOTP" class="form-control" id="floatingInput" placeholder="codice">
+                <label for="floatingInput">codice</label>
+            </div>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
         </form>
-
-        <footer class="mt-auto text-white-50">
-        <p>IMSPEC &copy; 2022</p>
-        </footer>
-    </div>  
+    </main>
   </body>
 </html>
