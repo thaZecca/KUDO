@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Amministratore - Aggiungi Utente</title>
   <link rel="icon" href="../resources/logo.png">
-</head>
 
 
 <?php
