@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dashboard - Ridistributore</title>
     <link rel="icon" href="../resources/logo.png">
-  </head>
  
   <?php 
         session_start();
