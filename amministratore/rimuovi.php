@@ -4,13 +4,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Amministratore - Aggiungi Utente</title>
+  <title>Amministratore - Rimuovi Utente</title>
   <link rel="icon" href="../resources/logo.png">
+</head>
 
 
 <?php
-  error_reporting(E_ALL ^ E_NOTICE);
-  $conn = new mysqli('localhost', 'root', '', 'bcc');
+error_reporting(E_ALL ^ E_NOTICE);
+$conn = new mysqli('localhost', 'root', '', 'bcc');
 ?>
 
 
@@ -116,35 +117,75 @@
           </div>
         </a>
         <div class="p-5 mb-4 bg-light rounded-3">
-          <h1 class="display-5 fw-bold">Rimuovi utente</h1><br>
-          <div class="container-fluid table-responsive">
-            <p class="lead col-md-8 fs-8">Informazioni utente.</p>
-            <table class="table table-striped table-hover">
-              <tr>
-                <th>Username 👤</th>
-              </tr>
-              <tr>
-                <td>
-                  <select name="assegnazione" class="form-select">
-                    <option selected></option>
-                      <?php
-                        $q = "SELECT * FROM utente  WHERE Username <> 'UtenteRimosso'";
-                        $ris = $conn -> query($q);
-                        $nUtenti = $ris -> num_rows;
-                        for ($i=0; $i < $nUtenti; $i++) { 
-                          $row = $ris -> fetch_assoc();
-                          echo '<option value="'.$row['Username'].'">'.$row['Username'].'</option>';
-                        }
-                      ?>
-                  </select>
-                </td>
-              </tr>
-            </table>
-            <input id="botn" class="mt-3 btn btn-primary btn-lg" type="submit" name="remove" value="Rimuovi">
-          </div>
-        </div>
+          
+        
 
-        <footer class="pt-3 mt-1 text-muted border-top">
+        
+
+<?php
+$selezioneUtente = '<h1 class="display-5 fw-bold">Rimuovi utente</h1><br>
+  <div class="container-fluid table-responsive">
+    <p class="lead col-md-8 fs-8">Informazioni utente.</p>
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>Username 👤</th>
+      </tr>
+      <tr>
+        <td>
+          <select name="assegnazione" class="form-select">
+            <option selected></option>;
+  ';
+$q = "SELECT * FROM utente WHERE Username <> 'UtenteRimosso'";
+$ris = $conn->query($q);
+$nUtenti = $ris->num_rows;
+for ($i = 0; $i < $nUtenti; $i++) {
+  $row = $ris->fetch_assoc();
+  $selezioneUtente = $selezioneUtente . '<option value="' . $row['Username'] . '">' . $row['Username'] . '</option>';
+}
+$selezioneUtente = $selezioneUtente . '</select>
+</td>
+</tr>
+</table>
+<input id="botn" class="mt-3 btn btn-primary btn-lg" type="submit" name="remove" value="Rimuovi">
+</div>';
+//fine selezione utente
+
+$confermaRimozione = '
+  <h1 class="display-5 fw-bold">Sei sicuro di voler rimuovere l\'utente: ' . $_POST['assegnazione'] . '</h1><br>
+  <h4 class="text-muted">L\'azione sarà irreversbile, vuoi continuare?</h4><br>
+  <input type="submit" class="btn btn-danger" name="Elimina" value="Elimina">
+  <input type="submit" class="btn btn-secondary" value="Annulla">
+  ';
+//fine conferma rimozione
+
+
+if (isset($_POST['remove'])) {
+  $userRimosso = $_POST['assegnazione'];
+  setcookie('userRimosso', $userRimosso, time() + 300, '/');
+  echo $confermaRimozione;
+  header('Refresh: 300; url=rimuovi.php');
+}
+else if (isset($_POST['Elimina'])) {
+  $user = $_COOKIE['userRimosso'];
+  $queryRisc = "UPDATE non_conformita SET UserRiscontro = 'UtenteRimosso' WHERE UserRiscontro = '$user'";
+  $queryCorr = "UPDATE non_conformita SET UserCorrezione = 'UtenteRimosso' WHERE UserCorrezione = '$user'";
+  $queryVeri = "UPDATE non_conformita SET UserVerifica = 'UtenteRimosso' WHERE UserVerifica = '$user'";
+  $queryRimozione = "DELETE FROM utente WHERE Username = '$user'";
+  $conn->query($queryRisc);
+  $conn->query($queryCorr);
+  $conn->query($queryVeri);
+  $conn->query($queryRimozione);
+  echo '<p class="lead col-md-8 fs-8">Utente rimosso con successo.</p>';
+  header('Refresh: 1; url=rimuovi.php');
+}
+else {
+  unset($_COOKIE['userRimosso']);
+  setcookie('userRimosso', '', time() - 314);
+  echo $selezioneUtente;
+}
+?>
+</div>
+<footer class="pt-3 mt-1 text-muted border-top">
           &copy; IMSPEC 2023
         </footer>
       </div>
@@ -152,17 +193,4 @@
   </main>
   </main>
 </body>
-
-<?php
-  if(isset($_POST['remove'])){
-    $queryRisc = "UPDATE non_conformita SET UserRiscontro = 'UtenteRimosso' WHERE UserRiscontro = '".$_POST['assegnazione']."'";
-    $queryCorr = "UPDATE non_conformita SET UserCorrezione = 'UtenteRimosso' WHERE UserCorrezione = '".$_POST['assegnazione']."'";
-    $queryVeri = "UPDATE non_conformita SET UserVerifica = 'UtenteRimosso' WHERE UserVerifica = '".$_POST['assegnazione']."'";
-    $queryRimozione = "DELETE FROM utente WHERE Username = '".$_POST['assegnazione']."'";
-    
-    $conn -> query($queryRisc);
-    $conn -> query($queryCorr);
-    $conn -> query($queryVeri);
-    $conn -> query($queryRimozione);
-  }
-?>
+</html>
