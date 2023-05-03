@@ -157,8 +157,12 @@
           if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 echo '<tr><td>'.$row['ID_NC'].'</td><td>'.$row['UserRiscontro'].'</td>';
-                if ($row['isInterna']) echo '<td>'.$row['Nome_Reparto'].'</td>';
-                else echo '<td>'.$row['ID_Fornitore'].'</td>';
+                if ($row['isInterna']==1) {
+                  echo '<td>'.$row['Nome_Reparto'].'</td>';
+                } else {
+                  $fornitore = $conn->query("SELECT Nominativo FROM fornitore WHERE ID_Fornitore=".$row['ID_Fornitore']);
+                  echo '<td>'.$fornitore.'</td>';
+                }
                 echo '<td>'.$row['Causa'].'</td><td>'.$row['UserCorrezione'].'</td><td>'.$row['Azione_Correttiva'].'</td><td>'.$row['DataScadenza'].'</td><td>'.$row['isCorretta'].'</td><td>'.$row['UserVerifica'].'</td><td>'.$row['isVerificata'].'</td><td>'.$row['isChiusa'].'</td></tr>';
               }
           }
@@ -178,18 +182,18 @@
 if (isset($_POST['ricerca'])) {
   $ricerca = '';
   $temp = $_POST['ricerca'];
-  if ($_POST['attributo'] == 'Origine') $ricerca = "Nome_Reparto LIKE '%".$temp."%' OR ID_Fornitore LIKE '%".$temp."%'";
-  else if ($_POST['attributo'] == 'all') $ricerca = "ID_NC LIKE '%".$temp."%' OR UserRiscontro LIKE '%".$temp."%' OR isInterna LIKE '%".$temp."%' OR Nome_Reparto LIKE '%".$temp."%' OR ID_Fornitore LIKE '%".$temp."%' OR Causa LIKE '%".$temp."%' OR UserCorrezione LIKE '%".$temp."%' OR Azione_Correttiva LIKE '%".$temp."%' OR DataScadenza LIKE '%".$temp."%' OR isCorretta LIKE '%".$temp."%' OR UserVerifica LIKE '%".$temp."%' OR isVerificata LIKE '%".$temp."%' OR isChiusa LIKE '%".$temp."%'";
+  if ($_POST['attributo'] == 'Origine') $ricerca = "Nome_Reparto LIKE '%".$temp."%' OR Nominativo LIKE '%".$temp."%'";
+  else if ($_POST['attributo'] == 'all') $ricerca = "ID_NC LIKE '%".$temp."%' OR UserRiscontro LIKE '%".$temp."%' OR isInterna LIKE '%".$temp."%' OR Nome_Reparto LIKE '%".$temp."%' OR Nominativo LIKE '%".$temp."%' OR Causa LIKE '%".$temp."%' OR UserCorrezione LIKE '%".$temp."%' OR Azione_Correttiva LIKE '%".$temp."%' OR DataScadenza LIKE '%".$temp."%' OR isCorretta LIKE '%".$temp."%' OR UserVerifica LIKE '%".$temp."%' OR isVerificata LIKE '%".$temp."%' OR isChiusa LIKE '%".$temp."%'";
   else $ricerca = $_POST['attributo']." LIKE '%".$temp."%'";
 
-  $sql = "SELECT * FROM non_conformita WHERE ".$ricerca;
+  $sql = "SELECT *, Nominativo FROM non_conformita JOIN fornitore ON non_conformita.ID_Fornitore = fornitore.ID_Fornitore WHERE ".$ricerca;
   $result = $conn->query($sql);
 
   $json = '';
   if ($result->num_rows > 0) {
     $file = array();
     while ($row = $result->fetch_assoc()) {
-      $file[] = array("ID_NC" => $row['ID_NC'], "UserRiscontro" => $row['UserRiscontro'], "isInterna" => $row['isInterna'], "Nome_Reparto" => $row['Nome_Reparto'], "ID_Fornitore" => $row['ID_Fornitore'], "Causa" => $row['Causa'], "UserCorrezione" => $row['UserCorrezione'], "Azione_Correttiva" => $row['Azione_Correttiva'], "DataScadenza" => $row['DataScadenza'], "isCorretta" => $row['isCorretta'], "UserVerifica" => $row['UserVerifica'], "isVerificata" => $row['isVerificata'], "isChiusa" => $row['isChiusa']);
+      $file[] = array("ID_NC" => $row['ID_NC'], "UserRiscontro" => $row['UserRiscontro'], "isInterna" => $row['isInterna'], "Nome_Reparto" => $row['Nome_Reparto'], "Nominativo" => $row['Nominativo'], "Causa" => $row['Causa'], "UserCorrezione" => $row['UserCorrezione'], "Azione_Correttiva" => $row['Azione_Correttiva'], "DataScadenza" => $row['DataScadenza'], "isCorretta" => $row['isCorretta'], "UserVerifica" => $row['UserVerifica'], "isVerificata" => $row['isVerificata'], "isChiusa" => $row['isChiusa']);
     }
     $json = json_encode($file);
   } else {
