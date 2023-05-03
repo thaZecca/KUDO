@@ -8,8 +8,8 @@ function ricerca() {
     for (var i = 0; i < file.length; i++) {
       var nc = file[i];
       testo += '<tr><td>'+nc['ID_NC']+'</td><td>'+nc['UserRiscontro']+'</td>';
-      if (nc['isInterna']) testo += '<td>'+nc['Nome_Reparto']+'</td>';
-      else testo += '<td>'+nc['ID_Fornitore']+'</td>';
+      if (nc['isInterna']==1) testo += '<td>'+nc['Nome_Reparto']+'</td>';
+      else testo += '<td>'+nc['Nominativo']+'</td>';
       testo += '<td>'+nc['Causa']+'</td><td>'+nc['UserCorrezione']+'</td><td>'+nc['Azione_Correttiva']+'</td><td>'+nc['DataScadenza']+'</td><td>'+nc['isCorretta']+'</td><td>'+nc['UserVerifica']+'</td><td>'+nc['isVerificata']+'</td><td>'+nc['isChiusa']+'</td></tr>';
     }
     testo += '</table></div>';
