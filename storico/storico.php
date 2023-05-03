@@ -193,7 +193,7 @@ if (isset($_POST['ricerca'])) {
     }
     $json = json_encode($file);
   } else {
-    $json = 'Nessun risultato.'
+    $json = 'Nessun risultato.';
   }
 
   echo '<div><p id="query">'.$json.'</p></div>';
