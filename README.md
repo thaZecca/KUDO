@@ -24,16 +24,21 @@
 
 <h3>Segnala una non conformità</h3>
 <p>In questa sezione puoi segnalare una nuova non conformità al sistema. Per farlo, seleziona l'origine della non conformità dal menu a tendina "Origine".
-<h2>Pagina ridistributore</h2>
-<p>La pagina ridistributore è la prima che vedrai quando accedi al sistema. È suddivisa in una sezione principale:</p>
 
-<h3>Assegna correzione</h3>
-<p>Questa serve per assegnare la correzione della NC, in questa pagina si può:</p>
+<br/><br/><br/>
+<h2>Pagina ridistributore</h2>
+<p>La pagina ridistributore è la prima che vedrai quando accedi al sistema. È suddivisa in tre sezioni principali:</p>
+
+<h3>In primo Piano</h3>
+<p>Questa sezione elenca le non conformità attuali che devono essere gestite. Ci sono due tipi di non conformità:</p>
 <ul>
-  <li>Aggiungere utente: si puo aggiungere un nuovo utente e assegnare la relativa password. A ogni utente creato potrà essere assegnata ima attività</li>
-  <li>Rimuovere utente: si può rimuovere un utente esistente. Quindi non sarà piu possibile assegnare attività a quell'utente</li>
-  <li>Cambiare privilegi utente: si può cambiare il ruolo di un utente. Questo per fornire a ogni utente la possibilità di eseguire diverse azioni in base al ruolo e ai privilegi</li>
+  <li>Non conformità da risolvere: ogni non conformità è identificata da un ID univoco e include informazioni sulla causa della non conformità, la scadenza per l'azione correttiva e a chi è assegnata la non conofrmità da risolvere.</li>
+  <li>Non conformità da verificare: ogni non conformità è identificata da un ID univoco e include informazioni sull'azione eseguita, la scadenza per la verifica, l'azione correttiva e a chi è assegnata la non conformità.</li>
 </ul>
+
+<h3>Segnala una non conformità</h3>
+<p>In questa sezione puoi segnalare una nuova non conformità al sistema. Per farlo, seleziona l'origine della non conformità dal menu a tendina "Origine".
+<p>Inserisci quindi la causa della non conformità nella textbox accanto. Questa informazione è importante per garantire che la non conformità venga risolta correttamente. Assicurati di fornire tutte le informazioni pertinenti per la causa della non conformità.</p>
 
 
 <h3>Storico</h3>
