@@ -1,3 +1,7 @@
+<?php 
+    session_start();
+    if(!isset($_SESSION['ruolo'])) header('location: ../login/index.php')
+?>
 <!doctype html>
 <html lang="it">
   <head>
@@ -95,14 +99,14 @@
 			<span class="fs-4 ms-3">Kudo</span>
 		  </a>
 		  <a href="../login/index.html" class="nav-link">
-			<span class="">Logout</span>
+			<span class="">Logout 👋</span>
 		  </a>
       </div>
     </header>
 
     <a href="./indirizzamento.php">
       <div class="p-1 mb-4 verde text-light rounded-3">
-          <img src="./exit3.png" style="max-height: 45px;" class="ps-3">
+          <img src="../resources/exit3.png" style="max-height: 45px;" class="ps-3">
       </div></a>
 
       <form method="POST" action="storico.php">
@@ -125,7 +129,7 @@
 
     <div class="p-5 mb-4 bg-light rounded-3" id="testo">
       <div class="container-fluid table-responsive">
-        <h1 class="display-5 fw-bold">Storico non conformità</h1><br>
+        <h1 class="display-5 fw-bold">Storico non conformità </h1><br>
         <table class="table table-striped table-hover">
           <tr>
             <th>ID</th>
@@ -141,33 +145,6 @@
             <th>isChiusa</th>
           </tr>
 
-          <?php
-          $host = "localhost";
-          $username = "qq5ccx3u_root";
-          $password = "kudokudo2023";
-          $db_nome = "qq5ccx3u_kudo";
-          $tab_nome = "utente";
-        
-          $conn = new mysqli($host, $username, $password, $db_nome) or die($conn -> error);
-          $conn -> select_db($db_nome) or die($conn -> error);
-
-          $sql = "SELECT * FROM non_conformita";
-          $result = $conn->query($sql);
-
-          if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo '<tr><td>'.$row['ID_NC'].'</td><td>'.$row['UserRiscontro'].'</td>';
-                if ($row['isInterna']==1) {
-                  echo '<td>'.$row['Nome_Reparto'].'</td>';
-                } else {
-                  $fornitore = $conn->query("SELECT Nominativo FROM fornitore WHERE ID_Fornitore=".$row['ID_Fornitore']);
-                  echo '<td>'.$fornitore.'</td>';
-                }
-                echo '<td>'.$row['Causa'].'</td><td>'.$row['UserCorrezione'].'</td><td>'.$row['Azione_Correttiva'].'</td><td>'.$row['DataScadenza'].'</td><td>'.$row['isCorretta'].'</td><td>'.$row['UserVerifica'].'</td><td>'.$row['isVerificata'].'</td><td>'.$row['isChiusa'].'</td></tr>';
-              }
-          }
-          ?>
-
         </table>
       </div>
     </div>
@@ -179,6 +156,14 @@
 </main>
 
 <?php
+    $host = "localhost";
+    $username = "qq5ccx3u_root";
+    $password = "kudokudo2023";
+    $db_nome = "qq5ccx3u_kudo";
+        
+    $conn = new mysqli($host, $username, $password, $db_nome) or die($conn -> error);
+    $conn -> select_db($db_nome) or die($conn -> error);
+          
 if (isset($_POST['ricerca'])) {
   $ricerca = '';
   $temp = $_POST['ricerca'];
@@ -186,22 +171,32 @@ if (isset($_POST['ricerca'])) {
   else if ($_POST['attributo'] == 'all') $ricerca = "ID_NC LIKE '%".$temp."%' OR UserRiscontro LIKE '%".$temp."%' OR isInterna LIKE '%".$temp."%' OR Nome_Reparto LIKE '%".$temp."%' OR Nominativo LIKE '%".$temp."%' OR Causa LIKE '%".$temp."%' OR UserCorrezione LIKE '%".$temp."%' OR Azione_Correttiva LIKE '%".$temp."%' OR DataScadenza LIKE '%".$temp."%' OR isCorretta LIKE '%".$temp."%' OR UserVerifica LIKE '%".$temp."%' OR isVerificata LIKE '%".$temp."%' OR isChiusa LIKE '%".$temp."%'";
   else $ricerca = $_POST['attributo']." LIKE '%".$temp."%'";
 
-  $sql = "SELECT *, Nominativo FROM non_conformita JOIN fornitore ON non_conformita.ID_Fornitore = fornitore.ID_Fornitore WHERE ".$ricerca;
+  $sql = "SELECT *, Nominativo FROM non_conformita LEFT JOIN fornitore ON non_conformita.ID_Fornitore = fornitore.ID_Fornitore WHERE ".$ricerca." ORDER BY ID_NC";
   $result = $conn->query($sql);
 
   $json = '';
-  if ($result->num_rows > 0) {
-    $file = array();
-    while ($row = $result->fetch_assoc()) {
-      $file[] = array("ID_NC" => $row['ID_NC'], "UserRiscontro" => $row['UserRiscontro'], "isInterna" => $row['isInterna'], "Nome_Reparto" => $row['Nome_Reparto'], "Nominativo" => $row['Nominativo'], "Causa" => $row['Causa'], "UserCorrezione" => $row['UserCorrezione'], "Azione_Correttiva" => $row['Azione_Correttiva'], "DataScadenza" => $row['DataScadenza'], "isCorretta" => $row['isCorretta'], "UserVerifica" => $row['UserVerifica'], "isVerificata" => $row['isVerificata'], "isChiusa" => $row['isChiusa']);
-    }
-    $json = json_encode($file);
-  } else {
-    $json = 'Nessun risultato.';
+  $file = array();
+  while ($row = $result->fetch_assoc()) {
+    $file[] = array("ID_NC" => $row['ID_NC'], "UserRiscontro" => $row['UserRiscontro'], "isInterna" => $row['isInterna'], "Nome_Reparto" => $row['Nome_Reparto'], "Nominativo" => $row['Nominativo'], "Causa" => $row['Causa'], "UserCorrezione" => $row['UserCorrezione'], "Azione_Correttiva" => $row['Azione_Correttiva'], "DataScadenza" => $row['DataScadenza'], "isCorretta" => $row['isCorretta'], "UserVerifica" => $row['UserVerifica'], "isVerificata" => $row['isVerificata'], "isChiusa" => $row['isChiusa']);
   }
+  
+}
+else{
+    $sql = "SELECT *, Nominativo FROM non_conformita LEFT JOIN fornitore ON non_conformita.ID_Fornitore = fornitore.ID_Fornitore ORDER BY ID_NC";
+          $result = $conn->query($sql);
+
+          $testo="";
+          if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $file[] = array("ID_NC" => $row['ID_NC'], "UserRiscontro" => $row['UserRiscontro'], "isInterna" => $row['isInterna'], "Nome_Reparto" => $row['Nome_Reparto'], "Nominativo" => $row['Nominativo'], "Causa" => $row['Causa'], "UserCorrezione" => $row['UserCorrezione'], "Azione_Correttiva" => $row['Azione_Correttiva'], "DataScadenza" => $row['DataScadenza'], "isCorretta" => $row['isCorretta'], "UserVerifica" => $row['UserVerifica'], "isVerificata" => $row['isVerificata'], "isChiusa" => $row['isChiusa']);
+            }
+        }
+}
+
+  $json = json_encode($file);
 
   echo '<div><p id="query">'.$json.'</p></div>';
-}
+
 ?>
     
   </body>
