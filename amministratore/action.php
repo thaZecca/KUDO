@@ -1,6 +1,6 @@
 <?php
     if(isset($_POST['update'])){
-        $conn = new mysqli('localhost', 'root', '', 'bcc');
+        $conn = new mysqli('localhost', 'root', '', 'qq5ccx3u_kudo');
         $r = $_POST['ruolo'];
         $u = $_POST['assegnazione'];
         $queryModifica = "UPDATE utente SET Ruolo = '$r' WHERE Username = '$u'";

@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dashboard - Ridistributore</title>
     <link rel="icon" href="../resources/logo.png">
+  </head>
  
   <?php 
         session_start();
         if($_SESSION['ruolo']!='Ridistributore')   header('location: ..\login\index.php');
 
         $host="localhost";
-        $username="qq5ccx3u_root";
-        $password="kudokudo2023";
+        $username="root";
+        $password="";
         $db_nome="qq5ccx3u_kudo";
 
         $conn = new mysqli($host, $username, $password, $db_nome) or die($conn -> error);
@@ -91,29 +92,29 @@
 			<span class="fs-4 ms-3">Kudo</span>
 		  </a>
 		  <a href="../login/index.php" class="nav-link">
-			<span class="">Logout ðŸ‘‹</span>
+			<span class="">Logout 👋</span>
 		  </a>
       </div>
     </header>
 
     <div class="p-5 mb-4 bg-light rounded-3">
-      <h1 class="display-5 fw-bold">In primo piano ðŸ“°</h1><br>
+      <h1 class="display-5 fw-bold">In primo piano 📰</h1><br>
       <div class="container-fluid table-responsive">
-        <p class="lead col-md-8 fs-8">Non conformitÃ  da risolvere.</p>
+        <p class="lead col-md-8 fs-8">Non conformità da risolvere.</p>
         <form action="ridistributoreVerifica.php" method="post">
           <table class="table table-striped table-hover">
             <tr>
-              <th>ID ðŸŽ¯</th>
-              <th>Origine ðŸš©</th>
-              <th>Causa ðŸ”¥</th>
-              <th>Scadenza ðŸ•‘</th>
-              <th>Azione correttiva ðŸ§¯</th>
-              <th>Assegna âœ”</th>
+              <th>ID 🎯</th>
+              <th>Origine 🚩</th>
+              <th>Causa 🔥</th>
+              <th>Scadenza 🕑</th>
+              <th>Azione correttiva 🧯</th>
+              <th>Assegna ✔</th>
             </tr>
             <tr></tr>
             <?php
-                $qry="SELECT ID_NC, isInterna, Nome_Reparto, ID_Fornitore, Causa FROM non_conformita WHERE UserCorrezione IS NULL";
-                $qryDipendenti="SELECT Username FROM utente WHERE Ruolo<>'Amministratore' OR Ruolo<>'Ridistributore'";
+                $qry="SELECT ID_NC, isInterna, Nome_Reparto, ID_Fornitore, Causa FROM non_conformita WHERE UserCorrezione IS NULL LIMIT 3";
+                $qryDipendenti="SELECT Username FROM utente WHERE Ruolo<>'Amministratore' AND Ruolo<>'Ridistributore'";
 
                 $res = $conn -> query($qry);
                 $num = $res -> num_rows;
@@ -148,17 +149,17 @@
           </table>
           </div>
           <div class="container-fluid py-5 table-responsive">
-            <p class="lead col-md-8 fs-8">Non conformitÃ  da verificare.</p>
+            <p class="lead col-md-8 fs-8">Non conformità da verificare.</p>
             <table class="table table-striped table-hover">
               <tr>
-                <th>ID ðŸŽ¯</th>
-                <th>Azione eseguita ðŸ¦º</th>
-                <th>Scadenza ðŸ•‘</th>
-                <th>Assegna âœ”</th>
+                <th>ID 🎯</th>
+                <th>Azione eseguita 🦺</th>
+                <th>Scadenza 🕑</th>
+                <th>Assegna ✔</th>
               </tr>
               <tr></tr>
               <?php
-                $qry="SELECT ID_NC, Azione_Correttiva FROM non_conformita WHERE isCorretta=1 AND UserVerifica IS NULL";
+                $qry="SELECT ID_NC, Azione_Correttiva FROM non_conformita WHERE isCorretta=1 AND UserVerifica IS NULL LIMIT 3";
 
                 $res = $conn -> query($qry);
                 $num = $res -> num_rows;
@@ -178,18 +179,18 @@
             </table>
           </div>
             <div class="container-fluid py-5 table-responsive">
-              <p class="lead col-md-8 fs-8">Non conformitÃ  da chiudere.</p>
+              <p class="lead col-md-8 fs-8">Non conformità da chiudere.</p>
               <table class="table table-striped table-hover">
                 <tr>
-                  <th>ID ðŸŽ¯</th>
-                  <th>Azione eseguita ðŸ¦º</th>
-                  <th>Chiudi âœ”</th>
+                  <th>ID 🎯</th>
+                  <th>Azione eseguita 🦺</th>
+                  <th>Chiudi ✔</th>
                  </tr>
                 <tr></tr>
                   <?php 
                     $qry="SELECT ID_NC, Azione_Correttiva
                     FROM non_conformita
-                    WHERE isCorretta=1 AND isVerificata=1 AND isChiusa=0";
+                    WHERE isCorretta=1 AND isVerificata=1 AND isChiusa=0 LIMIT 3";
 
                     $res = $conn -> query($qry);
                     $num = $res -> num_rows;
@@ -210,33 +211,52 @@
     <div class="row align-items-xxl-stretch">
       <div class="col-xxl-6 mb-3">
         <div class="h-100 p-5 text-bg-dark rounded-3">
-          <h2>Segnala una non conformitÃ  ðŸ“¢</h2>
-          <div class="container-fluid table-responsive mt-4">
-            <table class="table table-dark table-striped">
-              <tr>
-                <th>Origine</th>
-                <th>Causa</th>
-              </tr>
-              <tr>
-                <td>
-                  <select name="origine" class="form-select">
-                    <option selected></option>
-                    <option>Logistica</option>
-                    <option>Produzione</option>
-                    <option>Risorse umane</option>
-                  </select>
-                </td>
-                <td><input type="text" class="form-control" name="causa"></td>
-              </tr>
-            </table>
-          </div>
-          <button class="btn btn-outline-light" type="button">Segnala</button>
-        </div>
+          <h2>Segnala una non conformità 📢</h2>
+          <form action="segnalazione.php" method="POST">  
+                <div class="container-fluid table-responsive mt-4">
+                <table class="table table-dark table-striped">
+                      <tr>
+                        <th>Origine</th>
+                        <th>Causa</th>
+                      </tr>
+                      <tr>
+                        <td>
+                          <select name="origineNC" class="form-select">
+                            <option selected></option>
+                            <option value="1">Cliente - Reclamo</option>
+                            <?php
+                                $qry='SELECT Nominativo FROM reparto';
+                                $res = $conn -> query($qry);
+                                $numRes = $res -> num_rows;
+                                
+                                for($i=0; $i<$numRes; $i++){
+                                    $row = $res -> fetch_assoc();
+                                    echo '<option value="'.$row['Nominativo'].'">'.$row['Nominativo'].'</option>';
+                                }
+                                
+                                $qry='SELECT ID_Fornitore, Nominativo FROM fornitore';
+                                $res = $conn -> query($qry);
+                                $numRes = $res -> num_rows;
+                                
+                                for($i=0; $i<$numRes; $i++){
+                                    $row = $res -> fetch_assoc();
+                                    echo '<option value="'.$row['ID_Fornitore'].'">'.$row['Nominativo'].'</option>';
+                                }
+                            ?>
+                          </select>
+                        </td>
+                        <td><input type="text" class="form-control" name="causaNC"></td>
+                      </tr>
+                    </table>
+                  </div>
+                <button class="btn btn-outline-light" type="submit">Segnala</button>
+              </form>
+            </div>
       </div>
       <div class="col-xxl-6 mb-3">
         <div class="h-100 p-5 bg-light border rounded-3">
-          <h2>Storico ðŸ“š</h2>
-          <p>Lo storico mostra tutte le non conformitÃ  presenti, suddividendole in:
+          <h2>Storico 📚</h2>
+          <p>Lo storico mostra tutte le non conformità presenti, suddividendole in:
             <ul>
               <li>Da correggere</li>
               <li>Da verificare</li>
@@ -244,7 +264,7 @@
               <li>Concluse</li>
             </ul>
           </p>
-          <a href="./storico/storico.php"><button class="btn btn-outline-secondary" type="button">Esplora</button></a>
+          <a href="../storico/storico.php"><button class="btn btn-outline-secondary" type="button">Esplora</button></a>
         </div>
       </div>
     </div>

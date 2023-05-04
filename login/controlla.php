@@ -1,7 +1,7 @@
 <?php
     $host="localhost";
-    $username="qq5ccx3u_root";
-    $password="kudokudo2023";
+    $username="root";
+    $password="";
     $db_nome="qq5ccx3u_kudo";
     $tab_nome="utente";
 
@@ -21,7 +21,7 @@
     $pass_sha1 = sha1($password);//stringa troppo lunga per essere confrontata con la password del database (4 cifre)
     $pass_confronto = substr($pass_sha1, 0, 4);//prendo le prime 4 cifre della password cifrata che userò per il confronto
 
-    $query = "SELECT * FROM $tab_nome WHERE username = '$username' AND password = '$pass_confronto'";
+    $query = "SELECT * FROM $tab_nome WHERE Username = '".$username."' AND Password = '".$pass_confronto."'";
     $result = $conn -> query($query);       
     $conta = $result -> num_rows;
 
@@ -29,9 +29,7 @@
         session_start();
         $_SESSION['username'] = $username;
         $_SESSION['password'] = $password;
-        $row = $result -> fetch_assoc();
 
-        $_SESSION['ruolo']=$row['Ruolo'];
         header('location: ./OTP/otp.php');
 
     }else{

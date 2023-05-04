@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Chi siamo</title>
     <link rel="icon" href="./resources/logo.png">
+  </head>
 
 <link href="./resources/css/bootstrap.min.css" rel="stylesheet">
 
@@ -92,7 +93,7 @@
 
     <main class="px-3">
       <h1>Chi siamo.</h1>
-      <p class="lead">Siamo un gruppo di 5 studenti di informatica impegnati nel progetto PCTO delle non conformità. Project based in Padova, expanding to the future 🚀</p>
+      <p class="lead">Siamo un gruppo di 6 studenti di informatica impegnati nel progetto PCTO delle non conformità. Project based in Padova, expanding to the future 🚀</p>
     </main>
 
     <footer class="mt-auto text-white-50">

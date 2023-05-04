@@ -10,7 +10,7 @@
 
 <?php
 error_reporting(E_ALL ^ E_NOTICE);
-$conn = new mysqli('localhost', 'root', '', 'bcc');
+$conn = new mysqli('localhost', 'root', '', 'qq5ccx3u_kudo');
 ?>
 
 
@@ -105,14 +105,14 @@ $conn = new mysqli('localhost', 'root', '', 'bcc');
               <img src="../resources/logo.png" height=50 width=50>
               <span class="fs-4 ms-3">Kudo</span>
             </a>
-            <a href="../login/index.html" class="nav-link">
-              <span class="">Logout </span>
+            <a href="../login/index.php class="nav-link">
+              <span class="">Logout 👋</span>
             </a>
           </div>
         </header>
-        <a href="index.html">
+        <a href="index.php">
           <div class="p-1 mb-4 verde text-light rounded-3">
-            <img src="../exit3.png" style="max-height: 45px;" class="ps-3">
+            <img src="../resources/exit3.png" style="max-height: 45px;" class="ps-3">
           </div>
         </a>
         <div class="p-5 mb-4 bg-light rounded-3">

@@ -1,20 +1,21 @@
 <?php
     session_start();
 
-    if(!isset($_SESSION['ruolo'])) header('location: ../index.php');
+    if(!isset($_SESSION['username'])) header('location: ../index.php');
 
     $host="localhost";
-    $username="qq5ccx3u_root";
-    $password="kudokudo2023";
+    $username="root";
+    $password="";
     $db_nome="qq5ccx3u_kudo";
 
-    $conn = mysqli($host, $username, $password, $db_nome) or die($conn -> error);;
+    $conn = new mysqli($host, $username, $password, $db_nome) or die($conn -> error);
 
-    $qry='SELECT Username, Email FROM utente WHERE Username='.$_SESSION['username'];
+    $qry="SELECT Username, Ruolo, Email FROM utente WHERE Username='".$_SESSION['username']."'";
     $res = $conn -> query($qry);
-
-    $username = $res['Username'];
-    $emailUtente = $res['Email'];
+    $row = $res -> fetch_assoc();
+    $username = $row['Username'];
+    $emailUtente = $row['Email'];
+    $_SESSION['ruolo']=$row['Ruolo'];
 
     $codiceOTP='';
     for($i=0; $i<6; $i++){
@@ -36,18 +37,18 @@
     
     try {
       //Server settings
-      $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+      $mail->SMTPDebug = SMTP::DEBUG_OFF;                      //Enable verbose debug output
       $mail->isSMTP();                                            //Send using SMTP
-      $mail->Host       = 'authsmtp.securemail.pro';                     //Set the SMTP server to send through
+      $mail->Host       = '*****';                     //Set the SMTP server to send through
       $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-      $mail->Username   = '******';                     //SMTP username
+      $mail->Username   = '*****';                     //SMTP username
       $mail->Password   = '*****';                               //SMTP password
       $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
       $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
   
       //Recipients
       $mail->setFrom('service@kudokudo.it', 'Service Kudo');
-      $mail->addAddress(''.$emailUtente, ''.$username);     //Add a recipient
+      $mail->addAddress($emailUtente);     //Add a recipient
 
   
       //Content
@@ -56,7 +57,7 @@
       $mail->Body    = 'Codice OTP Kudo: <b>'.$codiceOTP.'</b>';
       $mail->AltBody = 'Codice OTP Kudo: '.$codiceOTP;
   
-      $p = $mail->send();
+      $mail->send();
     } catch (Exception $e) {
       echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
@@ -69,6 +70,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>KUDO · OTP</title>
     <link rel="icon" href="../../resources/logo.png">
+  </head>
 
 <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
 
@@ -145,13 +147,16 @@
         <form  action="./controllaOTP.php" method="POST">
             <img class="mb-4" src="../../resources/logoBianco.png" alt="" width="100" height="100">
             <h1>Verifica codice OTP</h1>
-            <p>Inserisci il codice OTP che ti è arrivato per email</p>
+            <p>Inserisci il codice OTP che ti è arrivato per email. Hai 60 secondi</p>
             <div class="form-floating">
                 <input type="text" name="codiceOTP" class="form-control" id="floatingInput" placeholder="codice">
                 <label for="floatingInput">codice</label>
             </div>
             <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
         </form>
+        <?php
+            header('refresh: 60; url:../index.php');
+        ?>
     </main>
   </body>
 </html>

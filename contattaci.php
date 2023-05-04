@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Contattaci</title>
     <link rel="icon" href="./resources/logo.png">
+  </head>
 
 <link href="./resources/css/bootstrap.min.css" rel="stylesheet">
 

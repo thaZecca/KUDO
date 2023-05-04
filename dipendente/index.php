@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Dashboard - Dipendente</title>
     <link rel="icon" href="../resources/logo.png">
+  </head>
     
   <?php 
         session_start();
         if($_SESSION['ruolo']!='Dipendente')   header('location: ..\login\index.php');
 
         $host="localhost";
-        $username="qq5ccx3u_root";
-        $password="kudokudo2023";
+        $username="root";
+        $password="";
         $db_nome="qq5ccx3u_kudo";
         $tab_nome="utente";
 
@@ -91,7 +92,7 @@
           <span class="fs-4 ms-3">Kudo</span>
           </a>
           <a href="../login/index.php" class="nav-link">
-          <span class="">Logout ðŸ‘‹</span>
+          <span class="">Logout 👋</span>
           </a>
           </div>
         </header>
@@ -99,21 +100,21 @@
         <form action="dipendenteVerifica.php" method="post">
           <div class="p-5 mb-4 bg-light rounded-3">
             <div class="container-fluid table-responsive">
-              <h1 class="display-5 fw-bold">In primo piano ðŸ“°</h1><br>
-              <p class="lead col-md-8 fs-8">Non conformitÃ  da risolvere.</p>
+              <h1 class="display-5 fw-bold">In primo piano 📰</h1><br>
+              <p class="lead col-md-8 fs-8">Non conformità da risolvere.</p>
               <table class="table table-striped table-hover">
                 <tr>
-                  <th>ID ðŸŽ¯</th>
-                  <th>Causa ðŸ”¥</th>
-                  <th>Azione correttiva ðŸ§¯</th>
-                  <th>Scadenza ðŸ•‘</th>
-                  <th>Fatto âœ”</th>
+                  <th>ID 🎯</th>
+                  <th>Causa 🔥</th>
+                  <th>Azione correttiva 🧯</th>
+                  <th>Scadenza 🕑</th>
+                  <th>Fatto ✔</th>
                 </tr>
                 <tr></tr>
                 <?php 
                   $qry="SELECT ID_NC, Causa, Azione_Correttiva, DataScadenza
                         FROM non_conformita JOIN utente ON (UserCorrezione=Username)
-                        WHERE Username='".$_SESSION['username']."' AND isCorretta=0";
+                        WHERE Username='".$_SESSION['username']."' AND isCorretta=0 LIMIT 5";
 
                   $res = $conn -> query($qry);
                   $num = $res -> num_rows;
@@ -128,19 +129,19 @@
               </table>
             </div>
               <div class="container-fluid py-5 table-responsive">
-                <p class="lead col-md-8 fs-8">Non conformitÃ  da verificare.</p>
+                <p class="lead col-md-8 fs-8">Non conformità da verificare.</p>
                 <table class="table table-striped table-hover">
                   <tr>
-                    <th>ID ðŸŽ¯</th>
-                    <th>Azione eseguita ðŸ¦º</th>
-                    <th>Scadenza ðŸ•‘</th>
-                    <th>Fatto âœ”</th>
+                    <th>ID 🎯</th>
+                    <th>Azione eseguita 🦺</th>
+                    <th>Scadenza 🕑</th>
+                    <th>Fatto ✔</th>
                   </tr>
                   <tr></tr>
                     <?php 
                       $qry="SELECT ID_NC, Azione_Correttiva, DataScadenza
                       FROM non_conformita JOIN utente ON (UserVerifica=Username)
-                      WHERE Username='".$_SESSION['username']."' AND isCorretta=1 AND isVerificata=0";
+                      WHERE Username='".$_SESSION['username']."' AND isCorretta=1 AND isVerificata=0 LIMIT 5";
 
                       $res = $conn -> query($qry);
                       $num = $res -> num_rows;
@@ -162,33 +163,52 @@
         <div class="row align-items-md-stretch">
           <div class="col-md-6">
             <div class="h-100 p-5 text-bg-dark rounded-3">
-              <h2>Segnala una non conformitÃ  ðŸ“¢</h2>
-              <div class="container-fluid table-responsive mt-4">
+              <h2>Segnala una non conformità 📢</h2>
+              <form action="segnalazione.php" method="POST">  
+                <div class="container-fluid table-responsive mt-4">
                 <table class="table table-dark table-striped">
-                  <tr>
-                    <th>Origine</th>
-                    <th>Causa</th>
-                  </tr>
-                  <tr>
-                    <td>
-                      <select name="origine" class="form-select">
-                        <option selected></option>
-                        <option>Logistica</option>
-                        <option>Produzione</option>
-                        <option>Risorse umane</option>
-                      </select>
-                    </td>
-                    <td><input type="text" class="form-control" name="causa"></td>
-                  </tr>
-                </table>
-              </div>
-              <button class="btn btn-outline-light" type="button">Segnala</button>
+                      <tr>
+                        <th>Origine</th>
+                        <th>Causa</th>
+                      </tr>
+                      <tr>
+                        <td>
+                          <select name="origineNC" class="form-select">
+                            <option selected></option>
+                            <option value="1">Cliente - Reclamo</option>
+                            <?php
+                                $qry='SELECT Nominativo FROM reparto';
+                                $res = $conn -> query($qry);
+                                $numRes = $res -> num_rows;
+                                
+                                for($i=0; $i<$numRes; $i++){
+                                    $row = $res -> fetch_assoc();
+                                    echo '<option value="'.$row['Nominativo'].'">'.$row['Nominativo'].'</option>';
+                                }
+                                
+                                $qry='SELECT ID_Fornitore, Nominativo FROM fornitore';
+                                $res = $conn -> query($qry);
+                                $numRes = $res -> num_rows;
+                                
+                                for($i=0; $i<$numRes; $i++){
+                                    $row = $res -> fetch_assoc();
+                                    echo '<option value="'.$row['ID_Fornitore'].'">'.$row['Nominativo'].'</option>';
+                                }
+                            ?>
+                          </select>
+                        </td>
+                        <td><input type="text" class="form-control" name="causaNC"></td>
+                      </tr>
+                    </table>
+                  </div>
+                <button class="btn btn-outline-light" type="submit">Segnala</button>
+              </form>
             </div>
           </div>
           <div class="col-md-6">
             <div class="h-100 p-5 bg-light border rounded-3">
-              <h2>Storico ðŸ“š</h2>
-              <p>Lo storico mostra tutte le non conformitÃ  presenti, suddividendole in:
+              <h2>Storico 📚</h2>
+              <p>Lo storico mostra tutte le non conformità presenti, suddividendole in:
                 <ul>
                   <li>Da correggere</li>
                   <li>Da verificare</li>
@@ -196,7 +216,7 @@
                   <li>Concluse</li>
                 </ul>
               </p>
-              <a href="#"><button class="btn btn-outline-secondary" type="button">Esplora</button></a>
+              <a href="../storico/storico.php"><button class="btn btn-outline-secondary" type="button">Esplora</button></a>
             </div>
           </div>
         </div>

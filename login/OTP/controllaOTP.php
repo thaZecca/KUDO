@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>KUDO · OTP</title>
     <link rel="icon" href="../../resources/logo.png">
+  </head>
 
 <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
 
@@ -89,8 +90,15 @@
                 echo '<main class="px-3">
                         <img class="mb-4" src="../../resources/logoBianco.png" alt="" width="100" height="100">
                         <h1>Codice OTP Corretto</h1>
-                        <p>Benvenuto '.$_SESSION['username'].'</p>
+                        <h2>Benvenuto '.$_SESSION['username'].'</h2>
+                        <p><br>Verrai reindirizzato automaticamente alla dashboard</p>
                      </main>';
+                    if($_SESSION['ruolo']=='Dipendente'){ 
+                        header('refresh: 3; url=../../dipendente/index.php');}
+                    else if($_SESSION['ruolo']=='Ridistributore'){
+                        header('refresh: 3; url=../../ridistributore/index.php');}
+                    else{ 
+                        header('refresh: 3; url=../../amministratore/index.php');}
             }
             else{
                 echo '<main class="px-3">
@@ -101,9 +109,7 @@
                 header('refresh: 3; url=../index.php');
             }
 
-            if($_SESSION['ruolo']='Dipendente') header('refresh: 3; url=../../dipendente/index.php');
-            else if($_SESSION['ruolo']='Ridistributore') header('refresh: 3; url=../../ridistributore/index.php');
-            else header('refresh: 3; url=../../amministratore/index.php');
+            
 
         ?>
         

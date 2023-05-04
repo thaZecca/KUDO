@@ -9,7 +9,7 @@
     
   <?php
     error_reporting(E_ALL ^ E_NOTICE);
-    $conn = new mysqli('localhost', 'root', '', 'bcc');
+    $conn = new mysqli('localhost', 'root', '', 'qq5ccx3u_kudo');
   ?>
     
 
@@ -107,14 +107,14 @@
             <img src="../resources/logo.png" height=50 width=50>
             <span class="fs-4 ms-3">Kudo</span>
             </a>
-            <a href="../login/index.html" class="nav-link">
-            <span class="">Logout </span>
+            <a href="../login/index.php" class="nav-link">
+            <span class="">Logout 👋</span>
             </a>
             </div>
           </header>
-          <a href="index.html">
+          <a href="index.php">
           <div class="p-1 mb-4 verde text-light rounded-3">
-              <img src="../exit3.png" style="max-height: 45px;" class="ps-3">
+              <img src="../resources/exit3.png" style="max-height: 45px;" class="ps-3">
           </div></a>
           <div class="p-5 mb-4 bg-light rounded-3">
             <h1 class="display-5 fw-bold">Aggiungi utente</h1><br>
@@ -125,6 +125,7 @@
                   <th>Username 👤</th>
                   <th>Password 🔑</th>
                   <th>Ruolo 👷‍♀️</th>
+                  <th>Email</th>
                 </tr>
                 <tr>
                   <td><input type="text" class="form-control" name="username"></td>
@@ -144,25 +145,14 @@
                       $top = $top . '
                     </select>
                   </td>
+                  <td><input type="email" class="form-control" name="email"></td>
                 </tr>
               </table>';
 
       $bot = '<input id="botn" class="mt-3 btn btn-primary btn-lg" type="submit"  name="add" value="Aggiungi">
             </div>
           </div>
-    
-          <div class="h-100 p-5 bg-light border rounded-3 mb-3">
-              <h2>Storico </h2>
-              <p>Lo storico mostra tutte le non conformità presenti, suddividendole in:
-              <ul>
-                  <li>Da correggere</li>
-                  <li>Da verificare</li>
-                  <li>In attesa</li>
-                  <li>Concluse</li>
-              </ul>
-              </p>
-              <a href="#"><button class="btn btn-outline-secondary" type="button">Esplora</button></a>
-          </div>
+          
     
           <footer class="pt-3 mt-1 text-muted border-top">
             &copy; IMSPEC 2023
@@ -174,6 +164,7 @@
       $username = $_POST['username'];
       $password = $_POST['password'];
       $ruolo = $_POST['assegnazione'];
+      $email = $_POST['email'];
       $pass_sha1 = sha1($password);
       $pass_ins = substr($pass_sha1, 0, 4);
       $query = "SELECT * FROM utente WHERE Username = '".$username."'";
@@ -185,12 +176,12 @@
         echo 'Username già in uso';
         echo $bot;
       }else{
-        $quey = "INSERT INTO `utente` (`Username`, `Password`, `Ruolo`) VALUES ('".$username."', '".$pass_ins."', '".$ruolo."')";
+        $quey = "INSERT INTO `utente` (`Username`, `Password`, `Ruolo`, `Email`) VALUES ('".$username."', '".$pass_ins."', '".$ruolo."', '".$email."')";
         $conn -> query($quey);
         echo $top;
         echo 'Utente inserito';
         echo $bot;
-        $conn -> close();
+        
       }
 
 
@@ -204,14 +195,14 @@
             <img src="../resources/logo.png" height=50 width=50>
             <span class="fs-4 ms-3">Kudo</span>
             </a>
-            <a href="../login/index.html" class="nav-link">
-            <span class="">Logout </span>
+            <a href="../login/index.php" class="nav-link">
+            <span class="">Logout 👋</span>
             </a>
             </div>
           </header>
-          <a href="index.html">
+          <a href="index.php">
           <div class="p-1 mb-4 verde text-light rounded-3">
-              <img src="../exit3.png" style="max-height: 45px;" class="ps-3">
+              <img src="../resources/exit3.png" style="max-height: 45px;" class="ps-3">
           </div></a>
           <div class="p-5 mb-4 bg-light rounded-3">
             <h1 class="display-5 fw-bold">Aggiungi utente</h1><br>
@@ -222,6 +213,7 @@
                   <th>Username 👤</th>
                   <th>Password 🔑</th>
                   <th>Ruolo 👷‍♀️</th>
+                  <th>Email</th>
                 </tr>
                 <tr>
                   <td><input type="text" class="form-control" name="username"></td>
@@ -241,6 +233,7 @@
                       echo '
                     </select>
                   </td>
+                  <td><input type="email" class="form-control" name="email"></td>
                 </tr>
               </table>
               <input id="botn" class="mt-3 btn btn-primary btn-lg" type="submit"  name="add" value="Aggiungi">
