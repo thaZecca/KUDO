@@ -1,3 +1,6 @@
+#KUDO
+Benvenuto nel sistema di gestione delle Non Conformità
+
 <br/><br/><br/>
 
 <h2>Pagina amministratore</h2>
