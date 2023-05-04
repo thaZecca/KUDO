@@ -20,10 +20,11 @@
   <li>Non conformità da risolvere: ogni non conformità è identificata da un ID univoco e include informazioni sulla causa della non conformità, l'azione correttiva richiesta, la scadenza per l'azione correttiva e lo stato attuale (fatto o non fatto).</li>
   <li>Non conformità da verificare: ogni non conformità è identificata da un ID univoco e include informazioni sull'azione eseguita, la scadenza per la verifica e lo stato attuale (fatto o non fatto).</li>
 </ul>
-<p>Inserisci quindi la causa della non conformità nella textbox accanto. Questa informazione è importante per garantire che la non conformità venga risolta correttamente. Assicurati di fornire tutte le informazioni pertinenti per la causa della non conformità.</p>
+
 
 <h3>Segnala una non conformità</h3>
-<p>In questa sezione puoi segnalare una nuova non conformità al sistema. Per farlo, seleziona l'origine della non conformità dal menu a tendina "Origine".
+<p>In questa sezione puoi segnalare una nuova non conformità al sistema. Per farlo, seleziona l'origine della non conformità dal menu a tendina "Origine".</p>
+ <p>Inserisci quindi la causa della non conformità nella textbox accanto. Questa informazione è importante per garantire che la non conformità venga risolta correttamente. Assicurati di fornire tutte le informazioni pertinenti per la causa della non conformità.</p>
 
 <br/><br/><br/>
 <h2>Pagina ridistributore</h2>
@@ -37,7 +38,7 @@
 </ul>
 
 <h3>Segnala una non conformità</h3>
-<p>In questa sezione puoi segnalare una nuova non conformità al sistema. Per farlo, seleziona l'origine della non conformità dal menu a tendina "Origine".
+<p>In questa sezione puoi segnalare una nuova non conformità al sistema. Per farlo, seleziona l'origine della non conformità dal menu a tendina "Origine".</p>
 <p>Inserisci quindi la causa della non conformità nella textbox accanto. Questa informazione è importante per garantire che la non conformità venga risolta correttamente. Assicurati di fornire tutte le informazioni pertinenti per la causa della non conformità.</p>
 
 
